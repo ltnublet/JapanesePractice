@@ -1,0 +1,80 @@
+{
+    "Category1": {
+        "A": {
+            "AcceptedInterpretations": [
+                "A",
+                "Ae"
+            ]
+        },
+        "B": {
+            "AcceptedInterpretations": [
+                "B",
+                "Bee"
+            ]
+        },
+        "C": {
+            "AcceptedInterpretations": [
+                "C",
+                "Cee"
+            ]
+        }
+    },
+    "Category2": {
+        "D": {
+            "AcceptedInterpretations": [
+                "D",
+                "Dee"
+            ]
+        },
+        "E": {
+            "AcceptedInterpretations": [
+                "E",
+                "Ee"
+            ] 
+        },
+        "F": {
+            "AcceptedInterpretations": [
+                "F",
+                "Ef"
+            ] 
+        }
+    },
+    "Category3": {
+        "G": {
+            "AcceptedInterpretations": [
+                "G",
+                "Gee"
+            ]
+        },
+        "H": {
+            "AcceptedInterpretations": [
+                "H",
+                "Aych"
+            ] 
+        },
+        "I": {
+            "AcceptedInterpretations": [
+                "I",
+                "Aye",
+                "Eye"
+            ] 
+        }
+    },
+    "Category4": {
+        "A": {
+            "AcceptedInterpretations": [
+                "Category4Interpretation"
+            ]
+        },
+        "D": {
+            "AcceptedInterpretations": [
+                "Category4Interpretation"
+            ] 
+        },
+        "G": {
+            "AcceptedInterpretations": [
+                "Category4Interpretation"
+            ] 
+        }
+    }
+}
