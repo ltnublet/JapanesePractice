@@ -23,7 +23,28 @@ namespace JapanesePractice.Tests
         [Fact]
         public void FromFile_ValidTarget_ShouldSucceed()
         {
+            // ReSharper disable once ConvertToConstant.Local - left as local variable for readability.
+            string expected = @"Category1: 
+A - A, Ae
+B - B, Bee
+C - C, Cee
+Category2: 
+D - D, Dee
+E - E, Ee
+F - F, Ef
+Category3: 
+G - G, Gee
+H - H, Aych
+I - I, Aye, Eye
+Category4: 
+A - Category4Interpretation
+D - Category4Interpretation
+G - Category4Interpretation
+";
+
             SUT.TextSymbolCollectionGroup actual = TextSymbolCollectionGroup.FromFile(ValidTargetPath);
+
+            Assert.Equal(expected, actual.ToString());
         }
     }
 }
