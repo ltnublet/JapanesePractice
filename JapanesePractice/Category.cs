@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace JapanesePractice
 {
     /// <summary>
-    /// Represents a category of <see cref="Symbol{T}"/>s.
+    /// Represents a category.
     /// </summary>
     public class Category
     {

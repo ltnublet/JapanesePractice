@@ -61,11 +61,29 @@ namespace JapanesePractice.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The supplied file was unable to be parsed..
+        /// </summary>
+        internal static string FailedToParseFile {
+            get {
+                return ResourceManager.GetString("FailedToParseFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The supplied path did not reference an existing file..
         /// </summary>
         internal static string FileNotFound {
             get {
                 return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
             }
         }
     }

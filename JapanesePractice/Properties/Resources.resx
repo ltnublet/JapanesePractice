@@ -117,8 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FailedToParseFile" xml:space="preserve">
+    <value>The supplied file was unable to be parsed.</value>
+    <comment>Displayed to the user when a supplied file is unable to be parsed.</comment>
+  </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>The supplied path did not reference an existing file.</value>
     <comment>Displayed to the user when a requested file does not exist.</comment>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+    <comment>Displayed to the user when an IEnumerable&lt;string&gt; would fail to be aggregated.</comment>
   </data>
 </root>

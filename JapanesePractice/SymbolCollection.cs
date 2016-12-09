@@ -12,93 +12,63 @@ using Newtonsoft.Json.Linq;
 namespace JapanesePractice
 {
     /// <summary>
-    /// A context within which supplied values are compared against known <see cref="Symbol{T}"/>s.
+    /// A context within which supplied values are compared against known <see cref="Symbol{TValue}"/>s.
     /// </summary>
-    public class SymbolCollection<T> : ICollection<Symbol<T>>
+    public class SymbolCollection<TKey, TValue> : ICollection<Symbol<TValue>>
     {
         /// <summary>
-        /// Instantiates a <see cref="SymbolCollection{T}"/> using the supplied parameters.
+        /// Instantiates a <see cref="SymbolCollection{TKey, TValue}"/> using the supplied parameters.
         /// </summary>
+        /// <param name="key">
+        /// The key by which the <see cref="SymbolCollection{TKey, TValue}"/> is identified.
+        /// </param>
         /// <param name="symbols">
-        /// The <see cref="Symbol{T}"/>s the collection wraps.
+        /// The <see cref="Symbol{TValue}"/>s the collection wraps.
         /// </param>
         /// <param name="comparer">
-        /// The means by which to compare an instance of an expected and actual pair. Expected to return true when two <see cref="T"/>s are equivalent.
+        /// The means by which to compare an instance of an expected and actual pair. Expected to return true when two <see cref="TValue"/>s are equivalent.
         /// </param>
-        /// <param name="isReadOnly"></param>
-        public SymbolCollection(IEnumerable<Symbol<T>> symbols, Func<T, T, bool> comparer, bool isReadOnly = false)
+        /// <param name="isReadOnly">
+        /// Controls whether the <see cref="SymbolCollection{TKey, TValue}"/> is read-only.
+        /// </param>
+        public SymbolCollection(TKey key, IEnumerable<Symbol<TValue>> symbols, Func<TValue, TValue, bool> comparer, bool isReadOnly = false)
         {
             this.Symbols = symbols.ThrowIfNull(nameof(symbols)).ToList();
             this.LocalComparer = comparer.ThrowIfNull(nameof(comparer));
             this.IsReadOnly = isReadOnly;
-
-            this.Categories = this.Symbols
+            this.Key = key;
         }
 
         /// <summary>
         /// The <see cref="Symbol{T}"/>s which the runner is operating upon.
         /// </summary>
-        public List<Symbol<T>> Symbols { get; private set; }
+        public List<Symbol<TValue>> Symbols { get; private set; }
 
         /// <summary>
-        /// An <see cref="IEnumerable{Category}"/> containing all categories in the <see cref="SymbolCollection{T}"/>.
-        /// </summary>
-        public IEnumerable<Category> Categories { get; private set; }
-
-        /// <summary>
-        /// Returns the number of elements in the <see cref="SymbolCollection{T}"/>.
+        /// Returns the number of elements in the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </summary>
         public int Count => this.Symbols.Count();
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="SymbolCollection{T}"/> is read-only.
+        /// Gets a value indicating whether the <see cref="SymbolCollection{TKey, TValue}"/> is read-only.
         /// </summary>
         public bool IsReadOnly { get; private set; }
+
+        /// <summary>
+        /// The key by which the <see cref="SymbolCollection{TKey, TValue}"/> is identified.
+        /// </summary>
+        public TKey Key { get; private set; }
         
         /// <summary>
         /// The comparator function to apply when checking for equivalence between actual and expected values.
         /// </summary>
-        protected Func<T, T, bool> LocalComparer { get; set; }
+        protected Func<TValue, TValue, bool> LocalComparer { get; set; }
 
         /// <summary>
-        /// Instantiates a <see cref="SymbolCollection{T}"/> from the supplied path using the supplied parser.
-        /// </summary>
-        /// <param name="path">
-        /// A path to a JSON-formatted file containing the expected <see cref="Symbol{T}"/>s.
-        /// </param>
-        /// <returns>
-        /// A <see cref="SymbolCollection{T}"/> representing the supplied file.
-        /// </returns>
-        public static SymbolCollection<T> FromFile(string path)
-        {
-            if (File.Exists(path.ThrowIfNull(nameof(path))))
-            {
-                JObject contents = null;
-
-                using (StreamReader file = File.OpenText(path))
-                using (JsonTextReader reader = new JsonTextReader(file))
-                {
-                    contents = (JObject)JToken.ReadFrom(reader);
-                }
-
-                foreach (KeyValuePair<string, JToken> symbol in contents)
-                {
-                    symbol.Value
-                }
-            }
-            else
-            {
-                throw new FileNotFoundException(Resources.FileNotFound);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Adds an item to the <see cref="SymbolCollection{T}"/>.
+        /// Adds an item to the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </summary>
         /// <param name="item"></param>
-        public void Add(Symbol<T> item)
+        public void Add(Symbol<TValue> item)
         {
             if (!this.IsReadOnly)
             {
@@ -107,7 +77,7 @@ namespace JapanesePractice
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="SymbolCollection{T}"/>.
+        /// Removes all items from the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </summary>
         public void Clear()
         {
@@ -118,29 +88,29 @@ namespace JapanesePractice
         }
 
         /// <summary>
-        /// Determines whether the <see cref="SymbolCollection{T}"/> contains a specific value.
+        /// Determines whether the <see cref="SymbolCollection{TKey, TValue}"/> contains a specific value.
         /// </summary>
         /// <param name="item">
-        /// The object to locate in the <see cref="SymbolCollection{T}"/>.
+        /// The object to locate in the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </param>
         /// <returns>
-        /// True if item is found in the <see cref="SymbolCollection{T}"/>; otherwise, false.
+        /// True if item is found in the <see cref="SymbolCollection{TKey, TValue}"/>; otherwise, false.
         /// </returns>
-        public bool Contains(Symbol<T> item)
+        public bool Contains(Symbol<TValue> item)
         {
-            return this.Symbols.Any(expected => item.Expected.Any(actual => actual.NullComparer<T>(expected.Actual)));
+            return this.Symbols.Any(expected => item.Expected.Any(actual => actual.NullComparer<TValue>(expected.Actual)));
         }
 
         /// <summary>
-        /// Copies the elements of the <see cref="SymbolCollection{T}"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+        /// Copies the elements of the <see cref="SymbolCollection{TKey, TValue}"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
         /// </summary>
         /// <param name="array">
-        /// The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="SymbolCollection{T}"/>. The <see cref="Array"/> must have zero-based indexing.
+        /// The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="SymbolCollection{TKey, TValue}"/>. The <see cref="Array"/> must have zero-based indexing.
         /// </param>
         /// <param name="arrayIndex">
         /// The zero-based index in <param name="array" /> at which copying begins.
         /// </param>
-        public void CopyTo(Symbol<T>[] array, int arrayIndex)
+        public void CopyTo(Symbol<TValue>[] array, int arrayIndex)
         {
             this.Symbols.CopyTo(array, arrayIndex);
         }
@@ -151,21 +121,21 @@ namespace JapanesePractice
         /// <returns>
         /// An enumerator that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator<Symbol<T>> GetEnumerator()
+        public IEnumerator<Symbol<TValue>> GetEnumerator()
         {
             return this.Symbols.GetEnumerator();
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="SymbolCollection{T}"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </summary>
         /// <param name="item">
-        /// The object to remove from the <see cref="SymbolCollection{T}"/>.
+        /// The object to remove from the <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </param>
         /// <returns>
-        /// True if item was successfully removed from the <see cref="SymbolCollection{T}"/>; otherwise, false. This method also returns false if item is not found in the original <see cref="SymbolCollection{T}"/>.
+        /// True if item was successfully removed from the <see cref="SymbolCollection{TKey, TValue}"/>; otherwise, false. This method also returns false if item is not found in the original <see cref="SymbolCollection{TKey, TValue}"/>.
         /// </returns>
-        public bool Remove(Symbol<T> item)
+        public bool Remove(Symbol<TValue> item)
         {
             return !this.IsReadOnly && this.Symbols.Remove(item);
         }
