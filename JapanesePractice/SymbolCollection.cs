@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,13 @@ namespace JapanesePractice
         /// <param name="isReadOnly">
         /// Controls whether the <see cref="SymbolCollection{TKey, TValue}"/> is read-only.
         /// </param>
-        public SymbolCollection(TKey key, IEnumerable<Symbol<TValue>> symbols, Func<TValue, TValue, bool> comparer, bool isReadOnly = false)
+        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", 
+            Justification = "StyleCop is mistakenly picking up isReadOnly as being Hungarian notation.")]
+        public SymbolCollection(
+            TKey key, 
+            IEnumerable<Symbol<TValue>> symbols, 
+            Func<TValue, TValue, bool> comparer, 
+            bool isReadOnly = false)
         {
             this.Symbols = symbols.ThrowIfNull(nameof(symbols)).ToList();
             this.LocalComparer = comparer.ThrowIfNull(nameof(comparer));

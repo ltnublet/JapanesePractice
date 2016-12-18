@@ -56,7 +56,6 @@ namespace JapanesePractice
 
                     try
                     {
-                        // ReSharper disable once PossibleNullReferenceException - we check for null before entering the try-catch.
                         return parser(file);
                     }
                     catch (Exception e)

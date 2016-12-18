@@ -13,8 +13,8 @@ namespace JapanesePractice.Tests
     /// <summary>
     /// Contains tests relating to the <see cref="SUT.TextSymbolCollectionGroup"/> class.
     /// </summary>
-    [SuppressMessage("ReSharper", "StyleCop.SA1600", Justification = "Test names should clearly indicate purpose, rendering XML documentation superfluous.")]
-    [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Test names should be human-readable and clearly separate the SUT, the parameters, and the expected outcome.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", 
+        Justification = "Test names should clearly indicate purpose, rendering XML documentation superfluous.")]
     public class TextSymbolCollectionGroupTests
     {
         private const string ResourcePath = @"..\..\..\";
@@ -23,7 +23,6 @@ namespace JapanesePractice.Tests
         [Fact]
         public void FromFile_ValidTarget_ShouldSucceed()
         {
-            // ReSharper disable once ConvertToConstant.Local - left as local variable for readability.
             string expected = @"Category1: 
 A - A, Ae
 B - B, Bee
