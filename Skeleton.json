@@ -1,80 +1,110 @@
 {
-    "Category1": {
-        "A": {
-            "AcceptedInterpretations": [
-                "A",
-                "Ae"
-            ]
-        },
-        "B": {
-            "AcceptedInterpretations": [
-                "B",
-                "Bee"
-            ]
-        },
-        "C": {
-            "AcceptedInterpretations": [
-                "C",
-                "Cee"
-            ]
-        }
-    },
-    "Category2": {
-        "D": {
-            "AcceptedInterpretations": [
-                "D",
-                "Dee"
-            ]
-        },
-        "E": {
-            "AcceptedInterpretations": [
-                "E",
-                "Ee"
-            ] 
-        },
-        "F": {
-            "AcceptedInterpretations": [
-                "F",
-                "Ef"
-            ] 
-        }
-    },
-    "Category3": {
-        "G": {
-            "AcceptedInterpretations": [
-                "G",
-                "Gee"
-            ]
-        },
-        "H": {
-            "AcceptedInterpretations": [
-                "H",
-                "Aych"
-            ] 
-        },
-        "I": {
-            "AcceptedInterpretations": [
-                "I",
-                "Aye",
-                "Eye"
-            ] 
-        }
-    },
-    "Category4": {
-        "A": {
-            "AcceptedInterpretations": [
-                "Category4Interpretation"
-            ]
-        },
-        "D": {
-            "AcceptedInterpretations": [
-                "Category4Interpretation"
-            ] 
-        },
-        "G": {
-            "AcceptedInterpretations": [
-                "Category4Interpretation"
-            ] 
-        }
-    }
+	"Categories": [
+		{
+			"Name": "Category1",
+			"Type": "Textual",
+			"Symbols": [
+				{
+					"Name": "A",
+					"Interpretations": [
+						"A",
+						"Ae"
+					]
+				},
+				{
+					"Name": "B",
+					"Interpretations": [
+						"B",
+						"Bee"
+					]
+				},
+				{
+					"Name": "C",
+					"Interpretations": [
+						"C",
+						"Cee"
+					]
+				}
+			]
+		},
+		{
+			"Name": "Category2",
+			"Type": "Textual",
+			"Symbols": [
+				{
+					"Name": "D",
+					"Interpretations": [
+						"D",
+						"Dee"
+					]
+				},
+				{
+					"Name": "E",
+					"Interpretations": [
+						"E",
+						"Ee"
+					]
+				},
+				{
+					"Name": "F",
+					"Interpretations": [
+						"F",
+						"Ef"
+					]
+				}
+			]
+		},
+		{
+			"Name": "Category3",
+			"Type": "Textual",
+			"Symbols": [
+				{
+					"Name": "G",
+					"Interpretations": [
+						"G",
+						"Gee"
+					]
+				},
+				{
+					"Name": "H",
+					"Interpretations": [
+						"H",
+						"Aych"
+					]
+				},
+				{
+					"Name": "I",
+					"Interpretations": [
+						"I",
+						"Aye",
+						"Eye"
+					]
+				}
+			]
+		},
+		{
+			"Name": "Category4",
+			"Type": "Textual",
+			"Symbols": [
+				{
+					"Name": "A",
+					"Interpretations": [
+						"Category4Interpretation"
+					]
+				},
+				{
+					"Name": "D",
+					"Interpretations": [
+						"Category4Interpretation"
+					]
+				},
+				{
+					"Name": "G",
+					"Interpretations": [
+						"Category4Interpretation"
+					]
+				}
+			]
+		}
+	]
 }
