@@ -2,23 +2,42 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using JapanesePractice.Interpretations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using JapanesePractice.Interpretations;
 
 namespace JapanesePractice.Contexts
 {
+    /// <summary>
+    /// Represents a set of <see cref="Category"/>s which contain <see cref="Textual"/> <see cref="IInterpretation"/>s.
+    /// </summary>
     public class TextualContext : IContext
     {
+        /// <summary>
+        /// Instantiates a new <see cref="TextualContext"/> with the initial set of <see cref="Category"/>s <paramref name="categories"/>.
+        /// </summary>
+        /// <param name="categories">
+        /// The initial set of <see cref="Category"/>s this <see cref="TextualContext"/> contains.
+        /// </param>
         public TextualContext(IEnumerable<Category> categories)
         {
             this.Categories = categories.ToList();
         }
 
+        /// <summary>
+        /// The <see cref="Category"/>s this <see cref="IContext"/> contains.
+        /// </summary>
         public List<Category> Categories { get; protected set; }
         
+        /// <summary>
+        /// Loads a <see cref="TextualContext"/> from the file specified by <paramref name="path"/>.
+        /// </summary>
+        /// <param name="path">
+        /// The complete file path to read from.
+        /// </param>
+        /// <returns>
+        /// A <see cref="TextualContext"/> whose contents have been loaded from the specified file.
+        /// </returns>
         public static TextualContext FromFile(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -31,6 +50,7 @@ namespace JapanesePractice.Contexts
                 JObject fileContents = null;
                 using (JsonTextReader reader = new JsonTextReader(file))
                 {
+                    reader.CloseInput = false;
                     fileContents = (JObject)JToken.ReadFrom(reader);
                 }
 
@@ -58,22 +78,38 @@ namespace JapanesePractice.Contexts
             }
         }
 
+        /// <summary>
+        /// Returns the merged <see cref="Symbol"/>s of the <see cref="TextualContext.Categories"/> where <see cref="Category.Name"/> was contained in <paramref name="categories"/>.
+        /// </summary>
+        /// <param name="categories">
+        /// The names of the <see cref="Category"/>s contained within this <see cref="TextualContext.Categories"/> to merge the <see cref="Symbol"/>s of.
+        /// </param>
+        /// <returns>
+        /// A collection of merged <see cref="Symbol"/>s.
+        /// </returns>
         public IEnumerable<Symbol> Condense(params string[] categories)
         {
-            Dictionary<string, Symbol> result = new Dictionary<string, Symbol>();
-
-            foreach (Category category in this.Categories.Where(x => categories.Contains(x.Name)))
+            if (categories == null)
             {
-                foreach (Symbol symbol in category)
-                {
-                    if (result.ContainsKey(symbol.Name))
-                    {
-                        result[symbol.Name].Interpretations.AddRange(symbol.Interpretations);
-                    }
-                }
+                throw new ArgumentNullException(nameof(categories));
             }
 
-            return result.Select(x => x.Value);
+            return Category.Merge(this.Categories.Where(category => categories.Contains(category.Name)));
+
+            ////Dictionary<string, Symbol> result = new Dictionary<string, Symbol>();
+
+            ////foreach (Category category in this.Categories.Where(x => categories.Contains(x.Name)))
+            ////{
+            ////    foreach (Symbol symbol in category)
+            ////    {
+            ////        if (result.ContainsKey(symbol.Name))
+            ////        {
+            ////            result[symbol.Name].Interpretations.AddRange(symbol.Interpretations);
+            ////        }
+            ////    }
+            ////}
+
+            ////return result.Select(x => x.Value);
         }
     }
 }

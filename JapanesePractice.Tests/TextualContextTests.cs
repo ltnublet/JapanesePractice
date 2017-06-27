@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using JapanesePractice.Contexts;
+using JapanesePractice.Interpretations;
 using Xunit;
-using SUT = JapanesePractice.Contexts;
 
 namespace JapanesePractice.Tests
 {
@@ -14,9 +11,42 @@ namespace JapanesePractice.Tests
         private const string Skeleton = ResourcePath + "Skeleton.json";
 
         [Fact]
+        [Trait("Category", "Integration")]
+        [Trait("Category", "Smoke")]
         public void FromFile_ValidJson_ShouldSucceed()
         {
-            SUT.TextualContext context = SUT.TextualContext.FromFile(Skeleton);
+            TextualContext context = TextualContext.FromFile(Skeleton);
+
+            Assert.Equal(
+                new string[] 
+                {
+                    "Category1",
+                    "Category2",
+                    "Category3",
+                    "Category4"
+                }, 
+                context
+                    .Categories
+                    .Select(x => x.Name));
+        }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        [Trait("Category", "Smoke")]
+        public void Condense_ValidCategories_ShouldSucceed()
+        {
+            TextualContext context = TextualContext.FromFile(Skeleton);
+
+            Assert.True(
+                new Textual(
+                    "A",
+                    "Ae",
+                    "Category4Interpretation")
+                .CompareAll(
+                    context
+                        .Condense("Category1", "Category4")
+                        .Single(x => x.Name == "A")
+                        .Interpretations));
         }
     }
 }
