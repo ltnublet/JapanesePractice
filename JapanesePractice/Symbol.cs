@@ -42,10 +42,10 @@ namespace JapanesePractice
         /// The name of the <see cref="Symbol"/>. <see cref="Symbol"/>s with the same <see cref="Symbol.Name"/> are considered the same, even if their <see cref="Symbol.Interpretations"/> aren't.
         /// </summary>
         public string Name { get; protected set; }
-        
+
         /// <summary>
         /// The set of <see cref="IInterpretation"/>s this <see cref="Symbol"/> is mapped to.
         /// </summary>
-        public List<IInterpretation> Interpretations { get; set; }
+        public ICollection<IInterpretation> Interpretations { get; }
     }
 }

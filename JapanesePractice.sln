@@ -1,14 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26014.0
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice", "JapanesePractice\JapanesePractice.csproj", "{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B0DA05B-AFD9-4532-9571-211799410F24}"
 	ProjectSection(SolutionItems) = preProject
-		Settings.StyleCop = Settings.StyleCop
+		JapanesePractice.ruleset = JapanesePractice.ruleset
 		Skeleton.json = Skeleton.json
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Tests", "JapanesePractice.Tests\JapanesePractice.Tests.csproj", "{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}"

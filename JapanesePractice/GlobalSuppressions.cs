@@ -1,6 +1,6 @@
-﻿// This file is used by Code Analysis to maintain SuppressMessage 
+﻿// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
-// Project-level suppressions either have no target or are given 
+// Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -27,3 +27,9 @@
     Justification = "This is triggered by the nested usings. The inner using nominally disposes of the TextReader when the JsonReader is disposed; however, we set the JsonReader's CloseInput property to false at runtime, which resolves the issue.",
     Scope = "member",
     Target = "JapanesePractice.Contexts.TextualContext.#FromFile(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.Naming",
+    "CA1710:IdentifiersShouldHaveCorrectSuffix",
+    Justification = "Class exposes additional functionality besides being a collection.",
+    Scope = "type",
+    Target = "JapanesePractice.Category")]

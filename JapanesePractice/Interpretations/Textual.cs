@@ -28,7 +28,7 @@ namespace JapanesePractice.Interpretations
         /// <param name="permittedRepresentations">
         /// The initial set of interpretations.
         /// </param>
-        public Textual(params string[] permittedRepresentations) 
+        public Textual(params string[] permittedRepresentations)
             : base(permittedRepresentations)
         {
         }

@@ -29,7 +29,9 @@ namespace JapanesePractice
 
             if (symbols == null || !symbols.Any())
             {
-                throw new ArgumentException($"{nameof(symbols)} must be non-null and contain at least one Symbol.", nameof(symbols));
+                throw new ArgumentException(
+                    FormattableString.Invariant($"{nameof(symbols)} must be non-null and contain at least one Symbol."),
+                    nameof(symbols));
             }
 
             this.Name = name;

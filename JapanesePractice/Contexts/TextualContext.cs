@@ -27,8 +27,8 @@ namespace JapanesePractice.Contexts
         /// <summary>
         /// The <see cref="Category"/>s this <see cref="IContext"/> contains.
         /// </summary>
-        public List<Category> Categories { get; protected set; }
-        
+        public ICollection<Category> Categories { get; }
+
         /// <summary>
         /// Loads a <see cref="TextualContext"/> from the file specified by <paramref name="path"/>.
         /// </summary>
@@ -65,7 +65,7 @@ namespace JapanesePractice.Contexts
                                 .Select(symbol =>
                                     new Symbol(
                                         symbol.Value<string>("Name"),
-                                        new List<IInterpretation> 
+                                        new List<IInterpretation>
                                         {
                                             // TODO: Use the category Type to instantiate correct Intepretation type.
                                             new Textual(

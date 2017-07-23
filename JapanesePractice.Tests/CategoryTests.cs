@@ -4,10 +4,10 @@ using Xunit;
 
 namespace JapanesePractice.Tests
 {
-    public class CategoryTests
+    public static class CategoryTests
     {
         [Fact]
-        public void Merge_ValidSymbols_ShouldSucceed()
+        public static void Merge_ValidSymbols_ShouldSucceed()
         {
             Category categoryOne = new Category(
                 "CategoryOne", 

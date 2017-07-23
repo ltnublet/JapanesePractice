@@ -5,7 +5,7 @@ using Xunit;
 
 namespace JapanesePractice.Tests
 {
-    public class TextualContextTests
+    public static class TextualContextTests
     {
         private const string ResourcePath = @"..\..\..\";
         private const string Skeleton = ResourcePath + "Skeleton.json";
@@ -13,7 +13,7 @@ namespace JapanesePractice.Tests
         [Fact]
         [Trait("Category", "Integration")]
         [Trait("Category", "Smoke")]
-        public void FromFile_ValidJson_ShouldSucceed()
+        public static void FromFile_ValidJson_ShouldSucceed()
         {
             TextualContext context = TextualContext.FromFile(Skeleton);
 
@@ -33,7 +33,7 @@ namespace JapanesePractice.Tests
         [Fact]
         [Trait("Category", "Integration")]
         [Trait("Category", "Smoke")]
-        public void Condense_ValidCategories_ShouldSucceed()
+        public static void Condense_ValidCategories_ShouldSucceed()
         {
             TextualContext context = TextualContext.FromFile(Skeleton);
 

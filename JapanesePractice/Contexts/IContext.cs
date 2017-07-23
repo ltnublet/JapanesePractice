@@ -10,6 +10,6 @@ namespace JapanesePractice.Contexts
         /// <summary>
         /// The <see cref="Category"/>s this <see cref="IContext"/> contains.
         /// </summary>
-        List<Category> Categories { get; }
+        ICollection<Category> Categories { get; }
     }
 }

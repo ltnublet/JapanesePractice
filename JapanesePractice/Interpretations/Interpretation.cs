@@ -16,7 +16,7 @@ namespace JapanesePractice.Interpretations
         /// <param name="permittedRepresentations">
         /// The initial set of interpretations.
         /// </param>
-        public Interpretation(params T[] permittedRepresentations) 
+        protected Interpretation(params T[] permittedRepresentations)
             : this(permittedRepresentations.AsEnumerable())
         {
         }
@@ -27,7 +27,7 @@ namespace JapanesePractice.Interpretations
         /// <param name="permittedRepresentations">
         /// The initial set of interpretations.
         /// </param>
-        public Interpretation(IEnumerable<T> permittedRepresentations)
+        protected Interpretation(IEnumerable<T> permittedRepresentations)
         {
             if (permittedRepresentations == null)
             {
@@ -35,7 +35,8 @@ namespace JapanesePractice.Interpretations
             }
             else if (!permittedRepresentations.Any())
             {
-                throw new ArgumentException($"{nameof(permittedRepresentations)} cannot be empty.");
+                throw new ArgumentException(
+                    FormattableString.Invariant($"{nameof(permittedRepresentations)} cannot be empty."));
             }
 
             this.PermittedRepresentations = permittedRepresentations;
