@@ -33,3 +33,9 @@
     Justification = "Class exposes additional functionality besides being a collection.",
     Scope = "type",
     Target = "JapanesePractice.Category")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.Design",
+    "CA1024:UsePropertiesWhereAppropriate",
+    Justification = "The method is named `GetPermittedRepresentations` because that's what it does; however, it is not a property.",
+    Scope = "member",
+    Target = "JapanesePractice.Interpretations.IInterpretation.#GetPermittedInterpretations()")]

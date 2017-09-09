@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using JapanesePractice.Interpretations;
 
@@ -21,7 +23,7 @@ namespace JapanesePractice
         public Symbol(string name, IEnumerable<IInterpretation> interpretations)
         {
             this.Name = name;
-            this.Interpretations = interpretations.ToList();
+            this.Interpretations = new InterpretationCollection(interpretations);
         }
 
         /// <summary>
@@ -46,6 +48,21 @@ namespace JapanesePractice
         /// <summary>
         /// The set of <see cref="IInterpretation"/>s this <see cref="Symbol"/> is mapped to.
         /// </summary>
-        public ICollection<IInterpretation> Interpretations { get; }
+        public InterpretationCollection Interpretations { get; }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "({0}): {1}",
+                this.Name,
+                string.Join("; ", this.Interpretations.Select(x => x.ToString())));
+        }
     }
 }

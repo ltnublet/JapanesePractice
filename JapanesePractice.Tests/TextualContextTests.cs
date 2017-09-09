@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using JapanesePractice.Contexts;
 using JapanesePractice.Interpretations;
 using Xunit;
@@ -36,17 +37,19 @@ namespace JapanesePractice.Tests
         public static void Condense_ValidCategories_ShouldSucceed()
         {
             TextualContext context = TextualContext.FromFile(Skeleton);
+            IInterpretation actualInterpretation = context
+                .Condense("Category1", "Category4")
+                .Single(x => x.Name == "A")
+                .Interpretations
+                .Condense();
 
             Assert.True(
-                new Textual(
+                new ObjectInterpretation(
                     "A",
                     "Ae",
+                    "Ayy (lmao)",
                     "Category4Interpretation")
-                .CompareAll(
-                    context
-                        .Condense("Category1", "Category4")
-                        .Single(x => x.Name == "A")
-                        .Interpretations));
+                .Compare(actualInterpretation));
         }
     }
 }

@@ -39,5 +39,13 @@ namespace JapanesePractice.Interpretations
         /// True if all of the <see cref="IInterpretation"/>s in <paramref name="list"/> were equivalent; false otherwise.
         /// </returns>
         bool CompareAll(IEnumerable<IInterpretation> list);
+
+        /// <summary>
+        /// Returns a collection of all the permitted representations of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A collection of all the permitted representations of the current instance.
+        /// </returns>
+        IEnumerable<object> GetPermittedInterpretations();
     }
 }

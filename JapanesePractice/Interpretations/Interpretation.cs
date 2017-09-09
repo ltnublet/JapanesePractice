@@ -79,7 +79,16 @@ namespace JapanesePractice.Interpretations
         /// <returns>
         /// True if equivalent; false otherwise.
         /// </returns>
-        public abstract bool Compare(IInterpretation other);
+        public virtual bool Compare(IInterpretation other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return new HashSet<object>(other.GetPermittedInterpretations())
+                .SetEquals(this.GetPermittedInterpretations());
+        }
 
         /// <summary>
         /// Checks that all of the <see cref="IInterpretation"/>s in the supplied <paramref name="list"/> are equivalent to the current instance.
@@ -107,6 +116,17 @@ namespace JapanesePractice.Interpretations
         public virtual bool CompareAny(IEnumerable<IInterpretation> list)
         {
             return list.Any(item => this.Compare(item));
+        }
+
+        /// <summary>
+        /// Returns a collection of all the permitted representations of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A collection of all the permitted representations of the current instance.
+        /// </returns>
+        public IEnumerable<object> GetPermittedInterpretations()
+        {
+            return this.PermittedRepresentations.Cast<object>();
         }
     }
 }

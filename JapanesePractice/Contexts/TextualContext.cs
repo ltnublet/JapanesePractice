@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace JapanesePractice.Contexts
 {
     /// <summary>
-    /// Represents a set of <see cref="Category"/>s which contain <see cref="Textual"/> <see cref="IInterpretation"/>s.
+    /// Represents a set of <see cref="Category"/>s which contain <see cref="TextualInterpretation"/> <see cref="IInterpretation"/>s.
     /// </summary>
     public class TextualContext : IContext
     {
@@ -68,7 +68,7 @@ namespace JapanesePractice.Contexts
                                         new List<IInterpretation>
                                         {
                                             // TODO: Use the category Type to instantiate correct Intepretation type.
-                                            new Textual(
+                                            new TextualInterpretation(
                                                 symbol.Value<JArray>("Interpretations")
                                                     .Select(interpretation => interpretation.Value<string>()))
                                         }))));
@@ -95,21 +95,17 @@ namespace JapanesePractice.Contexts
             }
 
             return Category.Merge(this.Categories.Where(category => categories.Contains(category.Name)));
+        }
 
-            ////Dictionary<string, Symbol> result = new Dictionary<string, Symbol>();
-
-            ////foreach (Category category in this.Categories.Where(x => categories.Contains(x.Name)))
-            ////{
-            ////    foreach (Symbol symbol in category)
-            ////    {
-            ////        if (result.ContainsKey(symbol.Name))
-            ////        {
-            ////            result[symbol.Name].Interpretations.AddRange(symbol.Interpretations);
-            ////        }
-            ////    }
-            ////}
-
-            ////return result.Select(x => x.Value);
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Join(", ", this.Categories.Select(x => x.Name));
         }
     }
 }

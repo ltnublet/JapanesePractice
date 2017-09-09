@@ -13,13 +13,13 @@ namespace JapanesePractice.Tests
                 "CategoryOne", 
                 new[] 
                 {
-                    new Symbol("SymbolOne", new Textual("CategoryOne"))
+                    new Symbol("SymbolOne", new TextualInterpretation("CategoryOne"))
                 });
             Category categoryTwo = new Category(
                 "CategoryTwo",
                 new[]
                 {
-                    new Symbol("SymbolOne", new Textual("CategoryTwo"))
+                    new Symbol("SymbolOne", new TextualInterpretation("CategoryTwo"))
                 });
 
             Assert.Equal(

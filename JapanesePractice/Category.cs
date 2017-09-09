@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using JapanesePractice.Interpretations;
 
@@ -103,6 +104,21 @@ namespace JapanesePractice
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "({0}): {1}",
+                this.Name,
+                string.Join(", ", this.Symbols.Select(x => x.Name)));
         }
     }
 }
