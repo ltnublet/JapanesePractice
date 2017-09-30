@@ -5,8 +5,9 @@ using System.Linq;
 using JapanesePractice.Interpretations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using JapanesePractice.Contexts;
 
-namespace JapanesePractice.Contexts
+namespace JapanesePractice.Textual
 {
     /// <summary>
     /// Represents a set of <see cref="Category"/>s which contain <see cref="TextualInterpretation"/> <see cref="IInterpretation"/>s.
@@ -28,55 +29,6 @@ namespace JapanesePractice.Contexts
         /// The <see cref="Category"/>s this <see cref="IContext"/> contains.
         /// </summary>
         public ICollection<Category> Categories { get; }
-
-        /// <summary>
-        /// Loads a <see cref="TextualContext"/> from the file specified by <paramref name="path"/>.
-        /// </summary>
-        /// <param name="path">
-        /// The complete file path to read from.
-        /// </param>
-        /// <returns>
-        /// A <see cref="TextualContext"/> whose contents have been loaded from the specified file.
-        /// </returns>
-        public static TextualContext FromFile(string path)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
-            using (TextReader file = new StreamReader(path))
-            {
-                JObject fileContents = null;
-                using (JsonTextReader reader = new JsonTextReader(file))
-                {
-                    reader.CloseInput = false;
-                    fileContents = (JObject)JToken.ReadFrom(reader);
-                }
-
-                List<Category> categories = new List<Category>();
-
-                foreach (JObject jCategory in fileContents.Value<JArray>("Categories"))
-                {
-                    categories.Add(
-                        new Category(
-                            jCategory.Value<string>("Name"),
-                            jCategory.Value<JArray>("Symbols")
-                                .Select(symbol =>
-                                    new Symbol(
-                                        symbol.Value<string>("Name"),
-                                        new List<IInterpretation>
-                                        {
-                                            // TODO: Use the category Type to instantiate correct Intepretation type.
-                                            new TextualInterpretation(
-                                                symbol.Value<JArray>("Interpretations")
-                                                    .Select(interpretation => interpretation.Value<string>()))
-                                        }))));
-                }
-
-                return new TextualContext(categories);
-            }
-        }
 
         /// <summary>
         /// Returns the merged <see cref="Symbol"/>s of the <see cref="TextualContext.Categories"/> where <see cref="Category.Name"/> was contained in <paramref name="categories"/>.

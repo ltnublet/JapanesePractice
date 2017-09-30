@@ -22,12 +22,6 @@
     Scope = "member",
     Target = "JapanesePractice.Interpretations.Interpretation`1.#.ctor(!0[])")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
-    "Microsoft.Usage",
-    "CA2202:Do not dispose objects multiple times",
-    Justification = "This is triggered by the nested usings. The inner using nominally disposes of the TextReader when the JsonReader is disposed; however, we set the JsonReader's CloseInput property to false at runtime, which resolves the issue.",
-    Scope = "member",
-    Target = "JapanesePractice.Contexts.TextualContext.#FromFile(System.String)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Microsoft.Naming",
     "CA1710:IdentifiersShouldHaveCorrectSuffix",
     Justification = "Class exposes additional functionality besides being a collection.",
@@ -39,3 +33,9 @@
     Justification = "The method is named `GetPermittedRepresentations` because that's what it does; however, it is not a property.",
     Scope = "member",
     Target = "JapanesePractice.Interpretations.IInterpretation.#GetPermittedInterpretations()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.Design",
+    "CA1026:DefaultParametersShouldNotBeUsed",
+    Justification = "Callers which do not support default parameters can refer to the documentation for safe defaults.",
+    Scope = "member",
+    Target = "JapanesePractice.Interpretations.InterpretationCollection.#Compare(JapanesePractice.Interpretations.InterpretationCollection,System.Func`3<JapanesePractice.Interpretations.IInterpretation,JapanesePractice.Interpretations.IInterpretation,System.Boolean>)")]

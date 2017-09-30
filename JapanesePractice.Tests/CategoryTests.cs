@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using JapanesePractice.Interpretations;
 using Xunit;
 
@@ -9,29 +10,35 @@ namespace JapanesePractice.Tests
         [Fact]
         public static void Merge_ValidSymbols_ShouldSucceed()
         {
+            const string symbolName = "Symbol";
+            const string categoryOneValue = "CategoryOne";
+            const string categoryTwoValue = "CategoryTwo";
+
+
             Category categoryOne = new Category(
-                "CategoryOne", 
+                "CategoryOne_NameShouldntAffectTest", 
                 new[] 
                 {
-                    new Symbol("SymbolOne", new TextualInterpretation("CategoryOne"))
+                    new Symbol(symbolName, new ObjectInterpretation(categoryOneValue))
                 });
             Category categoryTwo = new Category(
-                "CategoryTwo",
+                "CategoryTwo_NameShouldntAffectTest",
                 new[]
                 {
-                    new Symbol("SymbolOne", new TextualInterpretation("CategoryTwo"))
+                    new Symbol(symbolName, new ObjectInterpretation(categoryTwoValue))
                 });
 
-            Assert.Equal(
-                new[] { "CategoryOne", "CategoryTwo" }, 
-                Category
-                    .Merge(
-                        categoryOne, 
-                        categoryTwo)
-                    .Select(
-                        x => 
-                        x.Interpretations.Select(y => y.ToString()))
-                    .Single());
+            string[] expected = new[] { categoryOneValue, categoryTwoValue };
+            IEnumerable<object> actual = Category
+                .Merge(
+                    categoryOne,
+                    categoryTwo)
+                .Select(
+                    x =>
+                    x.Interpretations.SelectMany(y => y.GetPermittedInterpretations()))
+                .Single();
+
+            Assert.Equal(expected, actual);
         }
     }
 }

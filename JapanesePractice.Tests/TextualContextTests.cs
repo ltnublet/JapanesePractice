@@ -1,42 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using JapanesePractice.Contexts;
 using JapanesePractice.Interpretations;
+using JapanesePractice.Textual;
 using Xunit;
 
 namespace JapanesePractice.Tests
 {
     public static class TextualContextTests
     {
-        private const string ResourcePath = @"..\..\..\";
-        private const string Skeleton = ResourcePath + "Skeleton.json";
-
-        [Fact]
-        [Trait("Category", "Integration")]
-        [Trait("Category", "Smoke")]
-        public static void FromFile_ValidJson_ShouldSucceed()
-        {
-            TextualContext context = TextualContext.FromFile(Skeleton);
-
-            Assert.Equal(
-                new string[] 
-                {
-                    "Category1",
-                    "Category2",
-                    "Category3",
-                    "Category4"
-                }, 
-                context
-                    .Categories
-                    .Select(x => x.Name));
-        }
-
         [Fact]
         [Trait("Category", "Integration")]
         [Trait("Category", "Smoke")]
         public static void Condense_ValidCategories_ShouldSucceed()
         {
-            TextualContext context = TextualContext.FromFile(Skeleton);
+            IContext context;
+            using (StreamReader reader = new StreamReader(SharedResources.Skeleton))
+            {
+                context = new TextualLoader().FromFile(reader);
+            }
+
             IInterpretation actualInterpretation = context
                 .Condense("Category1", "Category4")
                 .Single(x => x.Name == "A")

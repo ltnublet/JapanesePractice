@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JapanesePractice.Interpretations;
 
-namespace JapanesePractice.Interpretations
+namespace JapanesePractice.Textual
 {
     /// <summary>
     /// A concrete instance of <see cref="Interpretation{T}"/> with type <see cref="string"/>.
