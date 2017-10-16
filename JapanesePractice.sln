@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice", "JapanesePractice\JapanesePractice.csproj", "{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}"
 EndProject
@@ -18,6 +18,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Textual", "JapanesePractice.Textual\JapanesePractice.Textual.csproj", "{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.FrontEnd.Debug", "JapanesePractice.Debug\JapanesePractice.FrontEnd.Debug.csproj", "{23C3CE02-5075-41F6-8788-F5E0A073D616}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Memrise", "Memrise", "{F79680B3-8897-4F65-ACF2-BFF4BFEBE8A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Japanese 2", "Japanese 2", "{72E9F708-E40B-4013-9690-253DF0021B34}"
+	ProjectSection(SolutionItems) = preProject
+		Memrise\Japanese 2\1 - Describing the Universe.json = Memrise\Japanese 2\1 - Describing the Universe.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +51,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F79680B3-8897-4F65-ACF2-BFF4BFEBE8A1} = {4B0DA05B-AFD9-4532-9571-211799410F24}
+		{72E9F708-E40B-4013-9690-253DF0021B34} = {F79680B3-8897-4F65-ACF2-BFF4BFEBE8A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2268C0A4-F844-4D7E-A576-A347BAB07FDB}

@@ -15,11 +15,7 @@ namespace JapanesePractice.Tests
         [Trait("Category", "Smoke")]
         public static void Condense_ValidCategories_ShouldSucceed()
         {
-            IContext context;
-            using (StreamReader reader = new StreamReader(SharedResources.Skeleton))
-            {
-                context = new TextualLoader().FromFile(reader);
-            }
+            IContext context = new TextualLoader().LoadContextFromPath(SharedResources.Skeleton);
 
             IInterpretation actualInterpretation = context
                 .Condense("Category1", "Category4")

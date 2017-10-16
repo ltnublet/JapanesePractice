@@ -36,7 +36,7 @@ namespace JapanesePractice
             }
 
             this.Name = name;
-            this.Symbols = symbols;
+            this.Symbols = symbols.ToList();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace JapanesePractice
         /// <summary>
         /// The symbols contained by the category.
         /// </summary>
-        public IEnumerable<Symbol> Symbols { get; protected set; }
+        public IReadOnlyList<Symbol> Symbols { get; protected set; }
 
         /// <summary>
         /// Merges the supplied <paramref name="categories"/> such that the resulting set is distinct by <see cref="Symbol.Name"/>, and the <see cref="Symbol"/> instance's <see cref="Symbol.Interpretations"/> contains all <see cref="IInterpretation"/>s from the original set of <see cref="Category"/>s.

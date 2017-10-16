@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{23C3CE02-5075-41F6-8788-F5E0A073D616}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>JapanesePractice.Debug</RootNamespace>
-    <AssemblyName>JapanesePractice.Debug</AssemblyName>
+    <RootNamespace>JapanesePractice.FrontEnd.Debug</RootNamespace>
+    <AssemblyName>JapanesePractice.FrontEnd.Debug</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoaderContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

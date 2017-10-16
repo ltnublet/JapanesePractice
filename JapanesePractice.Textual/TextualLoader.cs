@@ -10,80 +10,51 @@ using JapanesePractice.Loaders;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using JapanesePractice.Interpretations;
-using SysJson = System.Json;
 
 namespace JapanesePractice.Textual
 {
     [Export(typeof(ILoader))]
     public class TextualLoader : ILoader
     {
-        private const string SecretTypeKey = "Textual";
+        private static readonly IReadOnlyCollection<string> SupportedTypes = new string[] { "Textual" };
 
-        public bool AcceptsType(string type)
-        {
-            return string.Equals(type, TextualLoader.SecretTypeKey, StringComparison.OrdinalIgnoreCase);
-        }
+        public string[] TypesSupported => TextualLoader.SupportedTypes.ToArray();
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1062:Validate arguments of public methods",
-            MessageId = "0",
-            Justification = "Callers are expected to supply only valid data.")]
-        public Category CreateCategoryFromJson(SysJson.JsonObject categoryAsJson)
+        public Category CreateCategoryFromJson(string categoryJson)
         {
+            JObject jCategory = JObject.Parse(categoryJson);
             return new Category(
-                categoryAsJson["Name"],
-                (categoryAsJson["Symbols"] as SysJson.JsonArray)
-                    .Select(x => this.CreateSymbolFromJson(x as SysJson.JsonObject)));
+                jCategory.Value<string>("Name"),
+                jCategory.Value<JArray>("Symbols").Select(x => this.CreateSymbolFromJson(x.ToString())));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "TODO: Add method to ILoader interface.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1062:Validate arguments of public methods",
-            MessageId = "0",
-            Justification = "Callers are expected to supply only valid data.")]
-        public Symbol CreateSymbolFromJson(SysJson.JsonObject symbolAsJson)
+        public Symbol CreateSymbolFromJson(string symbolJson)
         {
+            JObject jSymbol = JObject.Parse(symbolJson);
             return new Symbol(
-                symbolAsJson["Name"],
-                new TextualInterpretation(
-                    ((SysJson.JsonArray)symbolAsJson["Interpretations"])
-                        .Select(x => (string)(((SysJson.JsonValue)x)))));
+                jSymbol.Value<string>("Name"),
+                new TextualInterpretation(jSymbol.Value<JArray>("Interpretations").Select(x => x.ToString())));
         }
 
-        public IContext FromFile(TextReader source)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "Erroneous - we specify that the JsonTextReader should not close the underlying stream upon being disposed.")]
+        public IContext LoadContextFromPath(string path)
         {
             JObject fileContents = null;
-            using (JsonTextReader reader = new JsonTextReader(source))
+            using (StreamReader fileReader = new StreamReader(path))
             {
-                reader.CloseInput = false;
-                fileContents = (JObject)JToken.ReadFrom(reader);
+                using (JsonTextReader jsonReader = new JsonTextReader(fileReader))
+                {
+                    jsonReader.CloseInput = false;
+                    fileContents = (JObject)JToken.ReadFrom(jsonReader);
+                }
             }
 
-            List<Category> categories = new List<Category>();
-
-            foreach (JObject jCategory in fileContents.Value<JArray>("Categories"))
-            {
-                categories.Add(
-                    new Category(
-                        jCategory.Value<string>("Name"),
-                        jCategory.Value<JArray>("Symbols")
-                            .Select(symbol =>
-                                new Symbol(
-                                    symbol.Value<string>("Name"),
-                                    new List<IInterpretation>
-                                    {
-                                        new TextualInterpretation(
-                                            symbol.Value<JArray>("Interpretations")
-                                                .Select(interpretation => interpretation.Value<string>()))
-                                    }))));
-            }
-
-            return new TextualContext(categories);
+            return new TextualContext(fileContents
+                .Value<JArray>("Categories")
+                .Select(x => this.CreateCategoryFromJson(x.ToString())));
         }
     }
 }

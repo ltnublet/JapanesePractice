@@ -16,11 +16,7 @@ namespace JapanesePractice.Tests
         [Trait("Category", "Smoke")]
         public static void FromFile_ValidJson_ShouldSucceed()
         {
-            IContext context;
-            using (StreamReader reader = new StreamReader(SharedResources.Skeleton))
-            {
-                context = new TextualLoader().FromFile(reader);
-            }
+            IContext context = new TextualLoader().LoadContextFromPath(SharedResources.Skeleton);
 
             Assert.Equal(
                 new string[]
@@ -46,7 +42,7 @@ namespace JapanesePractice.Tests
                 symbolAsJson = (JsonObject)JsonObject.Load(reader);
             }
 
-            Symbol actual = new TextualLoader().CreateSymbolFromJson(symbolAsJson);
+            Symbol actual = new TextualLoader().CreateSymbolFromJson(symbolAsJson.ToString());
             Symbol expected = new Symbol("A", new ObjectInterpretation("A", "Ae", "Ayy (lmao)"));
 
             Assert.Equal(expected.Name, actual.Name);

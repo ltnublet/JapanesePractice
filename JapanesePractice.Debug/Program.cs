@@ -14,45 +14,135 @@ namespace JapanesePractice.FrontEnd.Debug
 {
     public class Program
     {
-        [ImportMany(typeof(ILoader))]
-        private IEnumerable<Lazy<ILoader>> loaders;
+        private Dictionary<string, ILoader> Loaders;
 
-        public static void Main(string[] args)
+        public Program(string[] args)
         {
-            Program program = new Program();
-            program.Start(args);
-        }
-
-        public void Start(string[] args)
-        {
-            // This assignment is just so that code analysis stops complaining about unused variables - the real value
-            // comes from MEF.
-            this.loaders = new List<Lazy<ILoader>>();
+            LoaderContainer loaderContainer = new LoaderContainer();
 
             AggregateCatalog catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
             CompositionContainer container = new CompositionContainer(catalog);
-            container.ComposeParts(this);
+            container.ComposeParts(loaderContainer);
 
-            this.Run();
+            this.Loaders = new Dictionary<string, ILoader>();
+            foreach (ILoader loader in loaderContainer.Loaders)
+            {
+                foreach (string supportedType in loader.TypesSupported)
+                {
+                    this.Loaders.Add(supportedType, loader);
+                }
+            }
         }
 
-        public void Run()
+        public static void Main(string[] args)
         {
-            string path = @"..\..\..\Skeleton.json";
+            Program program = new Program(args);
+            program.Start();
+        }
 
-            IContext context;
-            using (TextReader reader = new StreamReader(path))
-            {
-                context = this.loaders.Single(loader => loader.Value.AcceptsType("Textual")).Value.FromFile(reader);
-            }
+        public void Start()
+        {
+            const string root = @"..\..\..\Memrise";
 
-            Console.WriteLine(context.ToString());
-            foreach(Category category in context.Categories)
+            string file = this.GetFileToLoad(root);
+            IContext context = this.Loaders["Textual"].LoadContextFromPath(file);
+
+            this.PrintSeparator();
+            List<Category> activeCategories = new List<Category>();
+            foreach (Category category in context.Categories)
             {
                 Console.WriteLine(category.ToString());
+                Console.Write("Include? (y/n): ");
+                string input = Console.ReadLine();
+                if (input.Equals("y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    activeCategories.Add(category);
+                }
             }
+            
+            if (activeCategories.Count < 1)
+            {
+                throw new InvalidOperationException("No categories selected.");
+            }
+
+            this.Run(activeCategories);
+
             Console.ReadLine();
+        }
+
+        private void Run(List<Category> categories)
+        {
+            Random random = new Random();
+            
+            int counter = 0;
+            int correct = 0;
+            while (true)
+            {
+                Category category = categories[random.Next(0, categories.Count)];
+                Symbol symbol = category.Symbols[random.Next(0, category.Symbols.Count)];
+
+                List<string> input = new List<string>();
+                while (input.Count != symbol.Interpretations[0].GetPermittedInterpretations().Count())
+                {
+                    Console.Write(string.Format(
+                        "({0}/{1}) {2}: ",
+                        input.Count + 1,
+                        symbol.Interpretations[0].GetPermittedInterpretations().Count(),
+                        symbol.Name));
+                    input.Add(Console.ReadLine());
+                }
+
+                if (new Textual.TextualInterpretation(input).CompareAll(symbol.Interpretations))
+                {
+                    correct++;
+                }
+                else
+                {
+                    Console.WriteLine(string.Join(
+                        ", ",
+                        symbol.Interpretations.Select(x =>
+                            string.Format(
+                                "{{{0}}}",
+                                string.Join(
+                                    ", ",
+                                    x.GetPermittedInterpretations().Select(y => y.ToString()))))));
+                }
+
+                Console.WriteLine(string.Format("Correct: {0}/{1}", correct, ++counter));
+            }
+        }
+
+        private string GetFileToLoad(string current)
+        {
+            if (current.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+            {
+                return current;
+            }
+
+            Dictionary<int, string> paths = new Dictionary<int, string>();
+            int counter = 0;
+            foreach (string directory in Directory.EnumerateDirectories(current))
+            {
+                paths.Add(counter++, directory);
+            }
+
+            foreach (string file in Directory.EnumerateFiles(current, "*.json"))
+            {
+                paths.Add(counter++, file);
+            }
+
+            foreach (KeyValuePair<int, string> pair in paths)
+            {
+                Console.WriteLine(string.Format("{0}: `{1}`", pair.Key, pair.Value));
+            }
+
+            return this.GetFileToLoad(paths[int.Parse(Console.ReadLine())]);
+        }
+
+        private void PrintSeparator()
+        {
+            Console.WriteLine("================================================================================");
         }
     }
 }
