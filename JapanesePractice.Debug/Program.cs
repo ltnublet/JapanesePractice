@@ -84,36 +84,53 @@ namespace JapanesePractice.FrontEnd.Debug
             
             int counter = 0;
             int correct = 0;
+            IInterpretation mostRecent = null;
             while (true)
             {
-                Category category = categories[random.Next(0, categories.Count)];
-                Symbol symbol = category.Symbols[random.Next(0, category.Symbols.Count)];
-                IInterpretation interpretation = symbol.Interpretations[random.Next(0, symbol.Interpretations.Count)];
+                Category category;
+                Symbol symbol;
+                IInterpretation interpretation;
 
-                List<string> input = new List<string>();
-                for (int lengthBuffer = interpretation.GetPermittedInterpretations().Count();
-                    input.Count < lengthBuffer;
-                    input.Add(Console.ReadLine()))
+                do
                 {
-                    this.PromptSymbol(input.Count + 1, lengthBuffer, symbol.Name);
-                }
+                    category = categories[random.Next(0, categories.Count)];
+                    symbol = category.Symbols[random.Next(0, category.Symbols.Count)];
+                    interpretation = symbol.Interpretations[random.Next(0, symbol.Interpretations.Count)];
+                } while (mostRecent == interpretation);
 
-                if (interpretation.Compare(new Textual.TextualInterpretation(input)))
+                mostRecent = interpretation;
+
+                List<string> input;
+                bool matched = false;
+                do
                 {
-                    correct++;
-                    Console.WriteLine("Correct!");
-                }
+                    input = new List<string>();
 
-                Console.WriteLine(string.Join(
-                    ", ",
-                    symbol.Interpretations.Select(x =>
-                        string.Format(
-                            "{{{0}}}",
-                            string.Join(
-                                ", ",
-                                x.GetPermittedInterpretations().Select(y => y.ToString()))))));
+                    for (int lengthBuffer = interpretation.GetPermittedInterpretations().Count();
+                        input.Count < lengthBuffer;
+                        input.Add(Console.ReadLine()))
+                    {
+                        this.PromptSymbol(input.Count + 1, lengthBuffer, symbol.Name);
+                    }
 
-                Console.WriteLine(string.Format("Correct: {0}/{1}", correct, ++counter));
+                    matched = interpretation.Compare(new Textual.TextualInterpretation(input));
+                    if (matched)
+                    {
+                        correct++;
+                        Console.WriteLine("Correct!");
+                    }
+
+                    Console.WriteLine(string.Join(
+                        ", ",
+                        symbol.Interpretations.Select(x =>
+                            string.Format(
+                                "{{{0}}}",
+                                string.Join(
+                                    ", ",
+                                    x.GetPermittedInterpretations().Select(y => y.ToString()))))));
+
+                    Console.WriteLine(string.Format("Correct: {0}/{1}", correct, ++counter));
+                } while (!matched);
             }
         }
 
