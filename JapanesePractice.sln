@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Tests", "J
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Textual", "JapanesePractice.Textual\JapanesePractice.Textual.csproj", "{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.FrontEnd.Debug", "JapanesePractice.Debug\JapanesePractice.FrontEnd.Debug.csproj", "{23C3CE02-5075-41F6-8788-F5E0A073D616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.FrontEnd.Debug", "JapanesePractice.FrontEnd.Debug\JapanesePractice.FrontEnd.Debug.csproj", "{23C3CE02-5075-41F6-8788-F5E0A073D616}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Memrise", "Memrise", "{F79680B3-8897-4F65-ACF2-BFF4BFEBE8A1}"
 EndProject
