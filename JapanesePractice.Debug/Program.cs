@@ -6,9 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using JapanesePractice.Contexts;
-using JapanesePractice.Interpretations;
-using JapanesePractice.Loaders;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Interpretations;
+using JapanesePractice.Contract.Loaders;
 
 namespace JapanesePractice.FrontEnd.Debug
 {
@@ -51,6 +52,8 @@ namespace JapanesePractice.FrontEnd.Debug
 
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
+
+            ConsoleHelper.SetConsoleFont();
 
             this.PrintSeparator();
             List<Category> activeCategories = new List<Category>();
