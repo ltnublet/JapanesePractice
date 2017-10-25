@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Japanese 2", "Japanese 2", 
 		Memrise\Japanese 2\1 - Describing the Universe.json = Memrise\Japanese 2\1 - Describing the Universe.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.HandWritten", "JapanesePractice.Handwritten\JapanesePractice.HandWritten.csproj", "{685C5C9E-B77F-44B1-917B-629B77B5D3B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{23C3CE02-5075-41F6-8788-F5E0A073D616}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C3CE02-5075-41F6-8788-F5E0A073D616}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C3CE02-5075-41F6-8788-F5E0A073D616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{685C5C9E-B77F-44B1-917B-629B77B5D3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685C5C9E-B77F-44B1-917B-629B77B5D3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685C5C9E-B77F-44B1-917B-629B77B5D3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685C5C9E-B77F-44B1-917B-629B77B5D3B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
