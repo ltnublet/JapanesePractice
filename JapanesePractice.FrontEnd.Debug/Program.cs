@@ -16,26 +16,17 @@ namespace JapanesePractice.FrontEnd.Debug
 {
     public class Program
     {
-        private Dictionary<string, ILoader> Loaders;
+        private LoaderContainer loaders;
         private bool showCount;
 
         public Program(string[] args)
         {
-            LoaderContainer loaderContainer = new LoaderContainer();
-
-            AggregateCatalog catalog = new AggregateCatalog();
-            catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
-            CompositionContainer container = new CompositionContainer(catalog);
-            container.ComposeParts(loaderContainer);
-
-            this.Loaders = new Dictionary<string, ILoader>();
-            foreach (ILoader loader in loaderContainer.Loaders)
+            string[] pluginLocations = new string[]
             {
-                foreach (string supportedType in loader.TypesSupported)
-                {
-                    this.Loaders.Add(supportedType, loader);
-                }
-            }
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+            };
+
+            loaders = new LoaderContainer(pluginLocations);
         }
 
         public static void Main(string[] args)
@@ -49,7 +40,7 @@ namespace JapanesePractice.FrontEnd.Debug
             const string root = @"..\..\..\Memrise";
 
             string file = this.GetFileToLoad(root);
-            IContext context = this.Loaders["Textual"].LoadContextFromPath(file);
+            IContext context = this.loaders["Textual"].LoadContextFromPath(file);
 
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;

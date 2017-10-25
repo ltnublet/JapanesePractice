@@ -7,7 +7,7 @@ using JapanesePractice.Contract.Contexts;
 namespace JapanesePractice.Textual
 {
     /// <summary>
-    /// Represents a set of <see cref="Category"/>s which contain <see cref="TextualInterpretation"/> <see cref="IInterpretation"/>s.
+    /// Represents a set of <see cref="Category"/>s which contain <see cref="TextualInterpretation"/> <see cref="JapanesePractice.Contract.Interpretations.IInterpretation"/>s.
     /// </summary>
     public class TextualContext : IContext
     {
