@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using JapanesePractice.Contexts;
-using JapanesePractice.Interpretations;
+using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Interpretations;
 using JapanesePractice.Textual;
 using Xunit;
 

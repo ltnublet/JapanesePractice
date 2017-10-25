@@ -7,8 +7,8 @@
     <ProjectGuid>{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JapanesePractice</RootNamespace>
-    <AssemblyName>JapanesePractice</AssemblyName>
+    <RootNamespace>JapanesePractice.Contract</RootNamespace>
+    <AssemblyName>JapanesePractice.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\JapanesePractice.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\JapanesePractice.Contract.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\JapanesePractice.ruleset</CodeAnalysisRuleSet>

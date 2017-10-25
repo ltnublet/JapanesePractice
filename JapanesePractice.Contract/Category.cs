@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using JapanesePractice.Interpretations;
+using JapanesePractice.Contract.Interpretations;
 
-namespace JapanesePractice
+namespace JapanesePractice.Contract
 {
     /// <summary>
     /// Represents a collection of <see cref="Symbol"/>s.

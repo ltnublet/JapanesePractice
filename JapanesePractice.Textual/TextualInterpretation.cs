@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JapanesePractice.Interpretations;
+using JapanesePractice.Contract.Interpretations;
 
 namespace JapanesePractice.Textual
 {

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using JapanesePractice.Loaders;
+using JapanesePractice.Contract.Loaders;
 
 namespace JapanesePractice.FrontEnd.Debug
 {

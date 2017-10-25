@@ -1,6 +1,6 @@
-﻿using JapanesePractice.Contexts;
+﻿using JapanesePractice.Contract.Contexts;
 
-namespace JapanesePractice.Loaders
+namespace JapanesePractice.Contract.Loaders
 {
     /// <summary>
     /// Represents a class which can produce an <see cref="IContext"/> from a data source.

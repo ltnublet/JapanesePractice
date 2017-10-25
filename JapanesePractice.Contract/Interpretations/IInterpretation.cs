@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JapanesePractice.Interpretations
+namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
     /// Represents an interpretation of a <see cref="Symbol"/>.

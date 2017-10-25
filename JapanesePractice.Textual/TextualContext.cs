@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using JapanesePractice.Interpretations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using JapanesePractice.Contexts;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Contexts;
 
 namespace JapanesePractice.Textual
 {

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JapanesePractice.Interpretations;
 using Xunit;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Interpretations;
 
 namespace JapanesePractice.Tests
 {

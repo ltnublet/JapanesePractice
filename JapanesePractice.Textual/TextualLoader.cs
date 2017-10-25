@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JapanesePractice.Contexts;
-using JapanesePractice.Loaders;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using JapanesePractice.Interpretations;
+using Newtonsoft.Json.Linq;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Loaders;
 
 namespace JapanesePractice.Textual
 {
@@ -39,7 +36,7 @@ namespace JapanesePractice.Textual
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Usage",
             "CA2202:Do not dispose objects multiple times",
-            Justification = "Erroneous - we specify that the JsonTextReader should not close the underlying stream upon being disposed.")]
+            Justification = "Invalid warning. We set the JsonTextReader's CloseInput property to False.")]
         public IContext LoadContextFromPath(string path)
         {
             JObject fileContents = null;

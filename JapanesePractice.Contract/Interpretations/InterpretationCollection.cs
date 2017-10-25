@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JapanesePractice.Interpretations
+namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
     /// Represents a collection of <see cref="IInterpretation"/>s.

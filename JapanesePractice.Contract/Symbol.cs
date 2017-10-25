@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using JapanesePractice.Interpretations;
+using JapanesePractice.Contract.Interpretations;
 
-namespace JapanesePractice
+namespace JapanesePractice.Contract
 {
     /// <summary>
     /// Represents a mapping between a <see cref="string"/> name and a set of <see cref="IInterpretation"/> interpretations. <see cref="Symbol"/>s with the same <see cref="Symbol.Name"/> are considered the same, even if their <see cref="Symbol.Interpretations"/> aren't.

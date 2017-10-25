@@ -5,10 +5,9 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using JapanesePractice.Contexts;
-using JapanesePractice.Loaders;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Loaders;
 
 namespace JapanesePractice.FrontEnd.Debug
 {

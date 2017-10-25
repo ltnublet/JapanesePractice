@@ -55,9 +55,9 @@
       <Project>{8e5a987f-a8a6-4e21-baa1-caa280dc104f}</Project>
       <Name>JapanesePractice.Textual</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JapanesePractice\JapanesePractice.csproj">
+    <ProjectReference Include="..\JapanesePractice.Contract\JapanesePractice.Contract.csproj">
       <Project>{029df99c-5e3c-4c6e-a5b2-4beb5f4b5536}</Project>
-      <Name>JapanesePractice</Name>
+      <Name>JapanesePractice.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

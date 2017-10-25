@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace JapanesePractice.Interpretations
+namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
     /// A concrete instance of <see cref="Interpretation{T}"/> with type <see cref="object"/>. Usage of this type should generally be avoided, unless the type of the contained objects is not known until runtime.

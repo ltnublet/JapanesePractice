@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JapanesePractice.Interpretations
+namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
     /// Represents an <see cref="IInterpretation"/> (generally of a <see cref="Symbol"/>) in the form of a set of type <typeparamref name="T"/>s which are considered equivalent.

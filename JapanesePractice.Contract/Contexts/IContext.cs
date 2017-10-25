@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JapanesePractice.Contexts
+namespace JapanesePractice.Contract.Contexts
 {
     /// <summary>
     /// Represents a set of <see cref="Category"/>s.

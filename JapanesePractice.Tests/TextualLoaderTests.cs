@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Json;
-using System.Linq;
-using JapanesePractice.Contexts;
-using JapanesePractice.Interpretations;
-using JapanesePractice.Textual;
 using Xunit;
+using System.Linq;
+using JapanesePractice.Contract;
+using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Interpretations;
+using JapanesePractice.Textual;
 
 namespace JapanesePractice.Tests
 {
