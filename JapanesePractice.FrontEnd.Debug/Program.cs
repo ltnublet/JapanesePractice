@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using JapanesePractice.Core;
 using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
 using JapanesePractice.Contract.Interpretations;
