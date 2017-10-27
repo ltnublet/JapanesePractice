@@ -26,7 +26,7 @@
     "CA1710:IdentifiersShouldHaveCorrectSuffix",
     Justification = "Class exposes additional functionality besides being a collection.",
     Scope = "type",
-    Target = "JapanesePractice.Contract.Category")]
+    Target = "JapanesePractice.Contract.ICategory")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Microsoft.Design",
     "CA1024:UsePropertiesWhereAppropriate",

@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Tests", "JapanesePractice.Tests\JapanesePractice.Tests.csproj", "{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Textual", "JapanesePractice.Textual\JapanesePractice.Textual.csproj", "{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.FrontEnd.Debug", "JapanesePractice.FrontEnd.Debug\JapanesePractice.FrontEnd.Debug.csproj", "{23C3CE02-5075-41F6-8788-F5E0A073D616}"
@@ -30,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.HandWritte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Core", "JapanesePractice.Core\JapanesePractice.Core.csproj", "{56DF72E3-06A8-4E55-8095-2BC516F0EF43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Contract.ReferenceImplementation", "JapanesePractice.Contract.ReferenceImplementation\JapanesePractice.Contract.ReferenceImplementation.csproj", "{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Tests.MSTest", "JapanesePractice.Tests.MSTest\JapanesePractice.Tests.MSTest.csproj", "{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,10 +42,6 @@ Global
 		{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5705B4C-9F58-434B-A0FC-8EF314E9D8D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5A987F-A8A6-4E21-BAA1-CAA280DC104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,6 +58,14 @@ Global
 		{56DF72E3-06A8-4E55-8095-2BC516F0EF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56DF72E3-06A8-4E55-8095-2BC516F0EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56DF72E3-06A8-4E55-8095-2BC516F0EF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

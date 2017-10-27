@@ -108,11 +108,14 @@ namespace JapanesePractice.Contract.Interpretations
 
             public bool Equals(IInterpretation x, IInterpretation y)
             {
-                if (x == null ^ y == null)
+                bool xIsNull = x == null;
+                bool yIsNull = x == null;
+
+                if (xIsNull ^ yIsNull)
                 {
                     return false;
                 }
-                else if (x == null && y == null)
+                else if (xIsNull && yIsNull)
                 {
                     return true;
                 }

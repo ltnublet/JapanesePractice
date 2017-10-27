@@ -13,29 +13,37 @@ namespace JapanesePractice.Core
     /// <summary>
     /// Represents a collection of <see cref="ILoader"/>s retrieved from plugins.
     /// </summary>
-    public class LoaderContainer : IEnumerable<KeyValuePair<string, IEnumerable<ILoader>>>
+    public class LoaderCollection : IEnumerable<KeyValuePair<string, IEnumerable<ILoader>>>
     {
         private Dictionary<string, List<LoaderTypePair>> Loaders;
         
         /// <summary>
-        /// Instantiates a new <see cref="LoaderContainer"/>, searching the specified <paramref name="pluginLocations"/> for plugins to load <see cref="ILoader"/>s from.
+        /// Instantiates a new <see cref="LoaderCollection"/>, searching the specified <paramref name="pluginLocations"/> for plugins to load <see cref="ILoader"/>s from.
         /// </summary>
         /// <param name="pluginLocations">
         /// The paths in which to search for plugins which export <see cref="ILoader"/>(s).
         /// </param>
-        public LoaderContainer(IEnumerable<string> pluginLocations)
+        public LoaderCollection(IEnumerable<string> pluginLocations)
         {
-            MefLoaderSource loaderContainer = new MefLoaderSource();
-
-            AggregateCatalog catalog = new AggregateCatalog();
-
-            foreach (string location in pluginLocations)
+            if (pluginLocations == null)
             {
-                catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(location)));
+                throw new ArgumentNullException(nameof(pluginLocations));
             }
 
-            CompositionContainer container = new CompositionContainer(catalog);
-            container.ComposeParts(loaderContainer);
+            MefLoaderSource loaderContainer = new MefLoaderSource();
+
+            using (AggregateCatalog catalog = new AggregateCatalog())
+            {
+                foreach (string location in pluginLocations)
+                {
+                    catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(location)));
+                }
+
+                using (CompositionContainer container = new CompositionContainer(catalog))
+                {
+                    container.ComposeParts(loaderContainer);
+                }
+            }
 
             this.Loaders = new Dictionary<string, List<LoaderTypePair>>(StringComparer.OrdinalIgnoreCase);
             foreach (ILoader loader in loaderContainer.Loaders)
@@ -65,7 +73,7 @@ namespace JapanesePractice.Core
         /// Thrown when there are multiple <see cref="ILoader"/>s that support the specified key.
         /// </exception>
         /// <exception cref="KeyNotFoundException">
-        /// The <see cref="LoaderContainer"/> did not contain a <see cref="ILoader"/> associated with the specified key.
+        /// The <see cref="LoaderCollection"/> did not contain a <see cref="ILoader"/> associated with the specified key.
         /// </exception>
         public ILoader this[string key]
         {
@@ -112,6 +120,12 @@ namespace JapanesePractice.Core
                 .GetEnumerator();
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// An enumerator that iterates through the collection.
+        /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();

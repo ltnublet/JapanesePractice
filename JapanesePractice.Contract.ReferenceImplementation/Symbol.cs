@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Linq;
 using JapanesePractice.Contract.Interpretations;
 
-namespace JapanesePractice.Contract
+namespace JapanesePractice.Contract.ReferenceImplementation
 {
     /// <summary>
     /// Represents a mapping between a <see cref="string"/> name and a set of <see cref="IInterpretation"/> interpretations. <see cref="Symbol"/>s with the same <see cref="Symbol.Name"/> are considered the same, even if their <see cref="Symbol.Interpretations"/> aren't.
     /// </summary>
-    public class Symbol
+    public class Symbol : ISymbol
     {
         /// <summary>
         /// Instantiates a new <see cref="Symbol"/> using the supplied <paramref name="name"/> and initial set of <paramref name="interpretations"/>.

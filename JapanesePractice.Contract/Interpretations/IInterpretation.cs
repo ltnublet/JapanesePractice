@@ -3,7 +3,7 @@
 namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
-    /// Represents an interpretation of a <see cref="Symbol"/>.
+    /// Represents an interpretation of a <see cref="ISymbol"/>.
     /// </summary>
     public interface IInterpretation
     {

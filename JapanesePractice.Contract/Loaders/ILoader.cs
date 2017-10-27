@@ -17,26 +17,26 @@ namespace JapanesePractice.Contract.Loaders
         string[] TypesSupported { get; }
 
         /// <summary>
-        /// Creates a <see cref="Category"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="categoryJson"/>.
+        /// Creates an <see cref="ICategory"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="categoryJson"/>.
         /// </summary>
         /// <param name="categoryJson">
-        /// The JSON-formatted data from which to create the <see cref="Category"/>.
+        /// The JSON-formatted data from which to create the <see cref="ICategory"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="Category"/> created from the supplied <see cref="string"/> <paramref name="categoryJson"/>.
+        /// An <see cref="ICategory"/> created from the supplied <see cref="string"/> <paramref name="categoryJson"/>.
         /// </returns>
-        Category CreateCategoryFromJson(string categoryJson);
+        ICategory CreateCategoryFromJson(string categoryJson);
 
         /// <summary>
-        /// Creates a <see cref="Symbol"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="symbolJson"/>.
+        /// Creates an <see cref="ISymbol"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="symbolJson"/>.
         /// </summary>
         /// <param name="symbolJson">
-        /// The JSON-formatted data from which to create the <see cref="Symbol"/>.
+        /// The JSON-formatted data from which to create the <see cref="ISymbol"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="Symbol"/> created from the supplied <see cref="string"/> <paramref name="symbolJson"/>.
+        /// An <see cref="ISymbol"/> created from the supplied <see cref="string"/> <paramref name="symbolJson"/>.
         /// </returns>
-        Symbol CreateSymbolFromJson(string symbolJson);
+        ISymbol CreateSymbolFromJson(string symbolJson);
 
         /// <summary>
         /// Creates an <see cref="IContext"/> from the file specified by <paramref name="path"/>, leaving interpretation up to the <see cref="ILoader"/>.

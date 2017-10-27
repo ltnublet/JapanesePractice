@@ -47,10 +47,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="InterpretationSelectorTable.cs" />
     <Compile Include="LoaderContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="SessionBuilder.cs" />
+    <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JapanesePractice.Contract.ReferenceImplementation\JapanesePractice.Contract.ReferenceImplementation.csproj">
+      <Project>{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}</Project>
+      <Name>JapanesePractice.Contract.ReferenceImplementation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JapanesePractice.Contract\JapanesePractice.Contract.csproj">
       <Project>{029df99c-5e3c-4c6e-a5b2-4beb5f4b5536}</Project>
       <Name>JapanesePractice.Contract</Name>

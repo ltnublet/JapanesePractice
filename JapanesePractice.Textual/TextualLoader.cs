@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
 using JapanesePractice.Contract.Loaders;
+using JapanesePractice.Contract.ReferenceImplementation;
 
 namespace JapanesePractice.Textual
 {
@@ -24,15 +25,15 @@ namespace JapanesePractice.Textual
         public string[] TypesSupported => TextualLoader.SupportedTypes.ToArray();
 
         /// <summary>
-        /// Creates a <see cref="Category"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="categoryJson"/>.
+        /// Creates an <see cref="ICategory"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="categoryJson"/>.
         /// </summary>
         /// <param name="categoryJson">
-        /// The JSON-formatted data from which to create the <see cref="Category"/>.
+        /// The JSON-formatted data from which to create the <see cref="ICategory"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="Category"/> created from the supplied <see cref="string"/> <paramref name="categoryJson"/>.
+        /// An <see cref="ICategory"/> created from the supplied <see cref="string"/> <paramref name="categoryJson"/>.
         /// </returns>
-        public Category CreateCategoryFromJson(string categoryJson)
+        public ICategory CreateCategoryFromJson(string categoryJson)
         {
             JObject jCategory = JObject.Parse(categoryJson);
             return new Category(
@@ -41,15 +42,15 @@ namespace JapanesePractice.Textual
         }
 
         /// <summary>
-        /// Creates a <see cref="Symbol"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="symbolJson"/>.
+        /// Creates an <see cref="ISymbol"/> from the supplied JSON-formatted <see cref="string"/> <paramref name="symbolJson"/>.
         /// </summary>
         /// <param name="symbolJson">
-        /// The JSON-formatted data from which to create the <see cref="Symbol"/>.
+        /// The JSON-formatted data from which to create the <see cref="ISymbol"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="Symbol"/> created from the supplied <see cref="string"/> <paramref name="symbolJson"/>.
+        /// An <see cref="ISymbol"/> created from the supplied <see cref="string"/> <paramref name="symbolJson"/>.
         /// </returns>
-        public Symbol CreateSymbolFromJson(string symbolJson)
+        public ISymbol CreateSymbolFromJson(string symbolJson)
         {
             JObject jSymbol = JObject.Parse(symbolJson);
             return new Symbol(

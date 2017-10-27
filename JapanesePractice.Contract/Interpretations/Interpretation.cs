@@ -5,10 +5,11 @@ using System.Linq;
 namespace JapanesePractice.Contract.Interpretations
 {
     /// <summary>
-    /// Represents an <see cref="IInterpretation"/> (generally of a <see cref="Symbol"/>) in the form of a set of type <typeparamref name="T"/>s which are considered equivalent.
+    /// Represents an <see cref="IInterpretation"/> (generally of a <see cref="ISymbol"/>) in the form of a set of type <typeparamref name="T"/>s which are considered equivalent.
     /// </summary>
     /// <typeparam name="T">The inner type of the collection of interpretations which are considered equivalent.</typeparam>
     public abstract class Interpretation<T> : IInterpretation
+        where T : class
     {
         /// <summary>
         /// Instantiates a new <see cref="Interpretation{T}"/> with the specified <paramref name="permittedRepresentations"/>.

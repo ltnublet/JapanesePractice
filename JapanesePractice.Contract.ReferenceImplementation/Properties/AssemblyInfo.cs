@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("JapanesePractice.Contract")]
+[assembly: AssemblyTitle("JapanesePractice.Contract.ReferenceImplementation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("JapanesePractice.Contract")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("JapanesePractice.Contract.ReferenceImplementation")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("029df99c-5e3c-4c6e-a5b2-4beb5f4b5536")]
+[assembly: Guid("7f8adbc9-a0a9-4f1c-abb7-d3f618ce884f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,5 +36,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: CLSCompliantAttribute(false)]
-
-[assembly: InternalsVisibleTo("JapanesePractice.Tests.MSTest")]

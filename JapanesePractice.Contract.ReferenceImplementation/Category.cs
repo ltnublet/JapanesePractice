@@ -5,12 +5,12 @@ using System.Globalization;
 using System.Linq;
 using JapanesePractice.Contract.Interpretations;
 
-namespace JapanesePractice.Contract
+namespace JapanesePractice.Contract.ReferenceImplementation
 {
     /// <summary>
-    /// Represents a collection of <see cref="Symbol"/>s.
+    /// Represents a collection of <see cref="ISymbol"/>s.
     /// </summary>
-    public class Category : IEnumerable<Symbol>
+    public class Category : ICategory
     {
         /// <summary>
         /// Instantiates a new <see cref="Category"/> instance with the specified <paramref name="name"/> and initial set of <paramref name="symbols"/>.
@@ -19,9 +19,9 @@ namespace JapanesePractice.Contract
         /// The name of the category.
         /// </param>
         /// <param name="symbols">
-        /// The initial set of <see cref="Symbol"/>s contained within this <see cref="Category"/>.
+        /// The initial set of <see cref="ISymbol"/>s contained within this <see cref="Category"/>.
         /// </param>
-        public Category(string name, IEnumerable<Symbol> symbols)
+        public Category(string name, IEnumerable<ISymbol> symbols)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -40,39 +40,39 @@ namespace JapanesePractice.Contract
         }
 
         /// <summary>
-        /// The name of the category.
+        /// The name of the <see cref="Category"/>.
         /// </summary>
         public string Name { get; protected set; }
 
         /// <summary>
-        /// The symbols contained by the category.
+        /// The symbols contained by the <see cref="Category"/>.
         /// </summary>
-        public IReadOnlyList<Symbol> Symbols { get; protected set; }
+        public IReadOnlyList<ISymbol> Symbols { get; protected set; }
 
         /// <summary>
-        /// Merges the supplied <paramref name="categories"/> such that the resulting set is distinct by <see cref="Symbol.Name"/>, and the <see cref="Symbol"/> instance's <see cref="Symbol.Interpretations"/> contains all <see cref="IInterpretation"/>s from the original set of <see cref="Category"/>s.
+        /// Merges the supplied <paramref name="categories"/> such that the resulting set is distinct by <see cref="ISymbol.Name"/>, and the <see cref="ISymbol"/> instance's <see cref="ISymbol.Interpretations"/> contains all <see cref="IInterpretation"/>s from the original set of <see cref="ICategory"/>s.
         /// </summary>
         /// <param name="categories">
-        /// A collection of <see cref="Category"/>s to merge.
+        /// A collection of <see cref="ICategory"/>s to merge.
         /// </param>
         /// <returns>
-        /// A collection of merged <see cref="Symbol"/>s.
+        /// A collection of merged <see cref="ISymbol"/>s.
         /// </returns>
-        public static IEnumerable<Symbol> Merge(params Category[] categories)
+        public static IEnumerable<ISymbol> Merge(params ICategory[] categories)
         {
             return Category.Merge(categories.AsEnumerable());
         }
 
         /// <summary>
-        /// Merges the supplied <paramref name="categories"/> such that the resulting set is distinct by <see cref="Symbol.Name"/>, and the <see cref="Symbol"/> instance's <see cref="Symbol.Interpretations"/> contains all <see cref="IInterpretation"/>s from the original set of <see cref="Category"/>s.
+        /// Merges the supplied <paramref name="categories"/> such that the resulting set is distinct by <see cref="ISymbol.Name"/>, and the <see cref="ISymbol"/> instance's <see cref="ISymbol.Interpretations"/> contains all <see cref="IInterpretation"/>s from the original set of <see cref="ICategory"/>s.
         /// </summary>
         /// <param name="categories">
-        /// A collection of <see cref="Category"/>s to merge.
+        /// A collection of <see cref="ICategory"/>s to merge.
         /// </param>
         /// <returns>
-        /// A collection of merged <see cref="Symbol"/>s.
+        /// A collection of merged <see cref="ISymbol"/>s.
         /// </returns>
-        public static IEnumerable<Symbol> Merge(IEnumerable<Category> categories)
+        public static IEnumerable<ISymbol> Merge(IEnumerable<ICategory> categories)
         {
             return categories
                 .SelectMany(category => category)
@@ -90,7 +90,7 @@ namespace JapanesePractice.Contract
         /// <returns>
         /// An enumerator that iterates through the collection.
         /// </returns>
-        public IEnumerator<Symbol> GetEnumerator()
+        public IEnumerator<ISymbol> GetEnumerator()
         {
             return this.Symbols.GetEnumerator();
         }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Xunit;
-using JapanesePractice.Contract;
 using JapanesePractice.Contract.Interpretations;
+using JapanesePractice.Contract.ReferenceImplementation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JapanesePractice.Tests
 {
+    [TestClass]
     public static class CategoryTests
     {
-        [Fact]
+        [TestMethod]
         public static void Merge_ValidSymbols_ShouldSucceed()
         {
             const string symbolName = "Symbol";
@@ -39,7 +40,7 @@ namespace JapanesePractice.Tests
                     x.Interpretations.SelectMany(y => y.GetPermittedInterpretations()))
                 .Single();
 
-            Assert.Equal(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

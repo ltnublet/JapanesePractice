@@ -11,22 +11,28 @@ using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
 using JapanesePractice.Contract.Interpretations;
 using JapanesePractice.Contract.Loaders;
+using JapanesePractice.Textual;
 
 namespace JapanesePractice.FrontEnd.Debug
 {
     public class Program
     {
-        private LoaderContainer loaders;
+        private ApplicationContext applicationContext;
+        private ConsoleSymbolSelector symbolSelector;
         private bool showCount;
 
         public Program(string[] args)
         {
-            string[] pluginLocations = new string[]
+            DirectoryInfo[] pluginLocations = new DirectoryInfo[]
             {
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                new DirectoryInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
             };
 
-            loaders = new LoaderContainer(pluginLocations);
+            this.symbolSelector = new ConsoleSymbolSelector();
+
+            SessionBuilder builder = new SessionBuilder().UsingSymbolSelector(this.symbolSelector);
+
+            this.applicationContext = new ApplicationContext(pluginLocations, builder);
         }
 
         public static void Main(string[] args)
@@ -40,7 +46,7 @@ namespace JapanesePractice.FrontEnd.Debug
             const string root = @"..\..\..\Memrise";
 
             string file = this.GetFileToLoad(root);
-            IContext context = this.loaders["Textual"].LoadContextFromPath(file);
+            IContext context = this.applicationContext.Loaders["Textual"].LoadContextFromPath(file);
 
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
@@ -48,8 +54,8 @@ namespace JapanesePractice.FrontEnd.Debug
             ConsoleHelper.SetConsoleFont();
 
             this.PrintSeparator();
-            List<Category> activeCategories = new List<Category>();
-            foreach (Category category in context.Categories)
+            List<ICategory> activeCategories = new List<ICategory>();
+            foreach (ICategory category in context.Categories)
             {
                 Console.WriteLine(category.ToString());
                 Console.Write("Include? (y/n): ");
@@ -73,7 +79,7 @@ namespace JapanesePractice.FrontEnd.Debug
             Console.ReadLine();
         }
 
-        private void Run(List<Category> categories)
+        private void Run(List<ICategory> categories)
         {
             Random random = new Random();
             
@@ -82,8 +88,8 @@ namespace JapanesePractice.FrontEnd.Debug
             IInterpretation mostRecent = null;
             while (true)
             {
-                Category category;
-                Symbol symbol;
+                ICategory category;
+                ISymbol symbol;
                 IInterpretation interpretation;
 
                 do

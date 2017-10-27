@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.ReferenceImplementation;
 
 namespace JapanesePractice.Textual
 {
@@ -12,31 +13,31 @@ namespace JapanesePractice.Textual
     public class TextualContext : IContext
     {
         /// <summary>
-        /// Instantiates a new <see cref="TextualContext"/> with the initial set of <see cref="Category"/>s <paramref name="categories"/>.
+        /// Instantiates a new <see cref="TextualContext"/> with the initial set of <see cref="ICategory"/>s <paramref name="categories"/>.
         /// </summary>
         /// <param name="categories">
-        /// The initial set of <see cref="Category"/>s this <see cref="TextualContext"/> contains.
+        /// The initial set of <see cref="ICategory"/>s this <see cref="TextualContext"/> contains.
         /// </param>
-        public TextualContext(IEnumerable<Category> categories)
+        public TextualContext(IEnumerable<ICategory> categories)
         {
             this.Categories = categories.ToList();
         }
 
         /// <summary>
-        /// The <see cref="Category"/>s this <see cref="IContext"/> contains.
+        /// The <see cref="ICategory"/>s this <see cref="IContext"/> contains.
         /// </summary>
-        public ICollection<Category> Categories { get; }
+        public ICollection<ICategory> Categories { get; }
 
         /// <summary>
-        /// Returns the merged <see cref="Symbol"/>s of the <see cref="TextualContext.Categories"/> where <see cref="Category.Name"/> was contained in <paramref name="categories"/>.
+        /// Returns the merged <see cref="ISymbol"/>s of the <see cref="TextualContext.Categories"/> where <see cref="ICategory.Name"/> was contained in <paramref name="categories"/>.
         /// </summary>
         /// <param name="categories">
-        /// The names of the <see cref="Category"/>s contained within this <see cref="TextualContext.Categories"/> to merge the <see cref="Symbol"/>s of.
+        /// The names of the <see cref="ICategory"/>s contained within this <see cref="TextualContext.Categories"/> to merge the <see cref="ISymbol"/>s of.
         /// </param>
         /// <returns>
-        /// A collection of merged <see cref="Symbol"/>s.
+        /// A collection of merged <see cref="ISymbol"/>s.
         /// </returns>
-        public IEnumerable<Symbol> Condense(params string[] categories)
+        public IEnumerable<ISymbol> Condense(params string[] categories)
         {
             if (categories == null)
             {

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{029DF99C-5E3C-4C6E-A5B2-4BEB5F4B5536}</ProjectGuid>
+    <ProjectGuid>{7F8ADBC9-A0A9-4F1C-ABB7-D3F618CE884F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JapanesePractice.Contract</RootNamespace>
-    <AssemblyName>JapanesePractice.Contract</AssemblyName>
+    <RootNamespace>JapanesePractice.Contract.ReferenceImplementation</RootNamespace>
+    <AssemblyName>JapanesePractice.Contract.ReferenceImplementation</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,10 +21,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\JapanesePractice.Contract.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\JapanesePractice.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\JapanesePractice.Contract.ReferenceImplementation.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,12 +33,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,30 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contexts\IContext.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ICategory.cs" />
-    <Compile Include="Interpretations\IInterpretation.cs" />
-    <Compile Include="Interpretations\Interpretation.cs" />
-    <Compile Include="Interpretations\InterpretationCollection.cs" />
-    <Compile Include="Interpretations\ObjectInterpretation.cs" />
-    <Compile Include="ISymbol.cs" />
-    <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selectors\ICategorySelector.cs" />
-    <Compile Include="Selectors\IInterpretationSelector.cs" />
-    <Compile Include="Selectors\ISymbolSelector.cs" />
-    <Compile Include="Utility\IRandomSource.cs" />
+    <Compile Include="RandomCategorySelector.cs" />
+    <Compile Include="RandomInterpretationSelector.cs" />
+    <Compile Include="RandomSymbolSelector.cs" />
+    <Compile Include="Symbol.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json">
+    <ProjectReference Include="..\JapanesePractice.Contract\JapanesePractice.Contract.csproj">
+      <Project>{029df99c-5e3c-4c6e-a5b2-4beb5f4b5536}</Project>
+      <Name>JapanesePractice.Contract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\stylecop.json">
       <Link>stylecop.json</Link>
-    </AdditionalFiles>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
