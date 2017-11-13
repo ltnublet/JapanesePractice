@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Contract.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapanesePractice.Tests.MSTest", "JapanesePractice.Tests.MSTest\JapanesePractice.Tests.MSTest.csproj", "{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CC23D573-ACEF-4F73-B5C9-941B76EC5940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C20C36B-B4E9-4757-B3F8-BE624D39C4AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC23D573-ACEF-4F73-B5C9-941B76EC5940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC23D573-ACEF-4F73-B5C9-941B76EC5940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC23D573-ACEF-4F73-B5C9-941B76EC5940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC23D573-ACEF-4F73-B5C9-941B76EC5940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
