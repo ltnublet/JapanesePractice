@@ -54,6 +54,10 @@
       <Project>{029df99c-5e3c-4c6e-a5b2-4beb5f4b5536}</Project>
       <Name>JapanesePractice.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JapanesePractice.Core\JapanesePractice.Core.csproj">
+      <Project>{56DF72E3-06A8-4E55-8095-2BC516F0EF43}</Project>
+      <Name>JapanesePractice.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JapanesePractice.Textual\JapanesePractice.Textual.csproj">
       <Project>{8e5a987f-a8a6-4e21-baa1-caa280dc104f}</Project>
       <Name>JapanesePractice.Textual</Name>

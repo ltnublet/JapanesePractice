@@ -54,14 +54,12 @@ namespace JapanesePractice.FrontEnd.Debug
                     CONSOLE_FONT_INFO_EX info = new CONSOLE_FONT_INFO_EX();
                     info.cbSize = (uint)Marshal.SizeOf(info);
 
-                    // Set console font to Lucida Console.
                     CONSOLE_FONT_INFO_EX newInfo = new CONSOLE_FONT_INFO_EX();
                     newInfo.cbSize = (uint)Marshal.SizeOf(newInfo);
                     newInfo.FontFamily = TMPF_TRUETYPE;
                     IntPtr ptr = new IntPtr(newInfo.FaceName);
                     Marshal.Copy(fontName.ToCharArray(), 0, ptr, fontName.Length);
 
-                    // Get some settings from current font.
                     newInfo.dwFontSize = new COORD(info.dwFontSize.X, info.dwFontSize.Y);
                     newInfo.FontWeight = info.FontWeight;
                     SetCurrentConsoleFontEx(hnd, false, ref newInfo);

@@ -1,4 +1,5 @@
 ﻿using JapanesePractice.Contract.Loaders;
+using JapanesePractice.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -19,7 +20,7 @@ namespace ConsoleApp1
         public static void Main(string[] args)
         {
             Program program = new Program();
-            program.Run();
+            program.Run2();
 
             Console.ReadLine();
         }
@@ -39,6 +40,21 @@ namespace ConsoleApp1
             }
 
             foreach (ILoader loader in this.loaders)
+            {
+                Console.WriteLine(loader.ToString());
+            }
+        }
+
+        public void Run2()
+        {
+            ApplicationContext context = new ApplicationContext(
+                new DirectoryInfo[]
+                {
+                    new DirectoryInfo(Path.GetFullPath(Assembly.GetExecutingAssembly().Location))
+                },
+                new SessionBuilder());
+
+            foreach (ILoader loader in context.Loaders.SelectMany(x => x.Value))
             {
                 Console.WriteLine(loader.ToString());
             }

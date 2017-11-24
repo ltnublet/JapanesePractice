@@ -36,8 +36,7 @@ namespace JapanesePractice.Core
             {
                 foreach (string location in pluginLocations)
                 {
-                    Console.WriteLine(location);
-                    catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(location)));
+                    catalog.Catalogs.Add(new DirectoryCatalog(Path.GetFullPath(location)));
                 }
 
                 using (CompositionContainer container = new CompositionContainer(catalog))
