@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
+using JapanesePractice.Contract.Interpretations;
 using JapanesePractice.Contract.Selectors;
 
 namespace JapanesePractice.Core
@@ -90,19 +92,53 @@ namespace JapanesePractice.Core
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Performance",
-            "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Debugging")]
-        internal void Debug()
+        /// <summary>
+        /// Selects an <see cref="ICategory"/> from the <see cref="Session"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="ICategory"/> contained by the <see cref="Session"/>.
+        /// </returns>
+        public ICategory SelectCategory()
         {
-            // TODO: Delete me.
+            return this.categorySelector.SelectFrom(this.context);
+        }
 
-            this.context.ToString();
-            this.symbolSelector.ToString();
-            this.categorySelector.ToString();
-            this.interpretationSelectors.ToString();
-            throw new NotImplementedException("This method only exists to make code analysis stop complaining while I work");
+        /// <summary>
+        /// Selects an <see cref="IInterpretation"/> from the <see cref="ISymbol"/> <paramref name="symbol"/>.
+        /// </summary>
+        /// <param name="symbol">
+        /// The <see cref="ISymbol"/> from which to select the <see cref="IInterpretation"/>.
+        /// </param>
+        /// <returns>
+        /// An <see cref="IInterpretation"/> contained within the supplied <see cref="ISymbol"/> <paramref name="symbol"/>'s <see cref="ISymbol.Interpretations"/>.
+        /// </returns>
+        public IInterpretation SelectInterpretation(ISymbol symbol)
+        {
+            if (symbol == null)
+            {
+                throw new ArgumentNullException(nameof(symbol));
+            }
+
+            return this.interpretationSelectors[symbol.GetType()].SelectFrom(symbol.Interpretations);
+        }
+
+        /// <summary>
+        /// Selects an <see cref="ISymbol"/> from the <see cref="ICategory"/> <paramref name="category"/>.
+        /// </summary>
+        /// <param name="category">
+        /// The <see cref="ICategory"/> from which to select the <see cref="ISymbol"/>.
+        /// </param>
+        /// <returns>
+        /// An <see cref="ISymbol"/> selected from the <see cref="ICategory"/> <paramref name="category"/>.
+        /// </returns>
+        public ISymbol SelectSymbol(ICategory category)
+        {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            return this.symbolSelector.SelectFrom(category);
         }
 
         /// <summary>

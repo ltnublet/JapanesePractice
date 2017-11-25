@@ -10,13 +10,33 @@ using JapanesePractice.Core;
 using JapanesePractice.Contract;
 using JapanesePractice.Contract.Contexts;
 using JapanesePractice.Contract.Interpretations;
-using JapanesePractice.Contract.Loaders;
-using JapanesePractice.Textual;
+using Microsoft.Win32;
 
 namespace JapanesePractice.FrontEnd.Debug
 {
     public class Program
     {
+        private static Lazy<bool> windowsVersionRequiresPrintHack = new Lazy<bool>(
+            () =>
+            {
+                try
+                {
+                    int windowsVersion = int.Parse(
+                        Registry
+                            .GetValue(
+                                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                                "ReleaseId",
+                                0)
+                            .ToString());
+
+                    return windowsVersion < 1709;
+                }
+                catch
+                {
+                    return false;
+                }
+            });
+
         private ApplicationContext applicationContext;
         private ConsoleSymbolSelector symbolSelector;
         private bool showCount;
@@ -54,19 +74,18 @@ namespace JapanesePractice.FrontEnd.Debug
             ConsoleHelper.SetConsoleFont();
 
             this.PrintSeparator();
-            List<ICategory> activeCategories = new List<ICategory>();
-            foreach (ICategory category in context.Categories)
+            foreach (ICategory category in context.Categories.ToList())
             {
                 Console.WriteLine(category.ToString());
                 Console.Write("Include? (y/n): ");
                 string input = Console.ReadLine();
-                if (input.Equals("y", StringComparison.InvariantCultureIgnoreCase))
+                if (input.Equals("n", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    activeCategories.Add(category);
+                    context.Categories.Remove(category);
                 }
             }
             
-            if (activeCategories.Count < 1)
+            if (context.Categories.Count < 1)
             {
                 throw new InvalidOperationException("No categories selected.");
             }
@@ -74,32 +93,26 @@ namespace JapanesePractice.FrontEnd.Debug
             Console.Write("For symbols with multiple interpretations, should a count be displayed? (y/n): ");
             this.showCount = Console.ReadLine().Equals("y", StringComparison.InvariantCultureIgnoreCase);
 
-            this.Run(activeCategories);
+            Session session = this.applicationContext.CreateSession(context);
+
+            this.Run(session);
 
             Console.ReadLine();
         }
 
-        private void Run(List<ICategory> categories)
+        private void Run(Session session)
         {
             Random random = new Random();
             
             int counter = 0;
             int correct = 0;
-            IInterpretation mostRecent = null;
             while (true)
             {
-                ICategory category;
                 ISymbol symbol;
                 IInterpretation interpretation;
 
-                do
-                {
-                    category = categories[random.Next(0, categories.Count)];
-                    symbol = category.Symbols[random.Next(0, category.Symbols.Count)];
-                    interpretation = symbol.Interpretations[random.Next(0, symbol.Interpretations.Count)];
-                } while (mostRecent == interpretation);
-
-                mostRecent = interpretation;
+                symbol = session.SelectSymbol(session.SelectCategory());
+                interpretation = session.SelectInterpretation(symbol);
 
                 List<string> input;
                 bool matched = false;
@@ -118,7 +131,13 @@ namespace JapanesePractice.FrontEnd.Debug
                     if (matched)
                     {
                         correct++;
+                        this.symbolSelector.ExpectedSymbol = null;
+                        this.symbolSelector.AddDisallowedOnNextSelectSymbol(symbol);
                         Console.WriteLine("Correct!");
+                    }
+                    else
+                    {
+                        this.symbolSelector.ExpectedSymbol = symbol;
                     }
 
                     Console.WriteLine(string.Join(
@@ -164,16 +183,7 @@ namespace JapanesePractice.FrontEnd.Debug
 
         private void PrintSeparator()
         {
-            Console.WriteLine("================================================================================");
-        }
-
-        private void PrintSpaces(int numberOfSpaces)
-        {
-            // Naive implementation, please don't judge, I know I should write to stream instead.
-            for (int counter = 0; counter < numberOfSpaces; counter++)
-            {
-                Console.Write(' ');
-            }
+            Console.WriteLine(new string('=', Console.BufferWidth));
         }
 
         private void PromptSymbol(int currentInterpretationIndex, int totalNumberOfInterpretations, string symbolName)
@@ -191,8 +201,11 @@ namespace JapanesePractice.FrontEnd.Debug
                 Console.Write(string.Format("{0}: ", symbolName));
             }
 
-            // Hack for versions of windows prior to the Creators Update (figure out better solution)
-            this.PrintSpaces(symbolName.Length);
+            if (Program.windowsVersionRequiresPrintHack.Value)
+            {
+                // Hack for versions of windows prior to the Creators Update (figure out better solution)
+                Console.Write(new string(' ', symbolName.Length));
+            }
         }
     }
 }
