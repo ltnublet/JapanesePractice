@@ -17,7 +17,7 @@ namespace JapanesePractice.Core
         private ISymbolSelector symbolSelector;
         private InterpretationSelectorTable interpretationSelectors;
 
-        private List<CallbackStatePair> beforeDisposalCallbacks;
+        private SynchronizedCollection<CallbackStatePair> beforeDisposalCallbacks;
         private bool isDisposed;
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace JapanesePractice.Core
             this.categorySelector = categorySelector;
             this.interpretationSelectors = interpretationSelectors;
 
-            this.beforeDisposalCallbacks = new List<CallbackStatePair>();
+            this.beforeDisposalCallbacks = new SynchronizedCollection<CallbackStatePair>();
             this.isDisposed = false;
         }
 
@@ -64,8 +64,9 @@ namespace JapanesePractice.Core
         /// </returns>
         public IDisposable RegisterDisposedCallback(Action<object> callback, object state)
         {
-            CallbackStatePair pair = new CallbackStatePair(this.beforeDisposalCallbacks, callback, state);
+            CallbackStatePair pair = new CallbackStatePair(callback, state);
             this.beforeDisposalCallbacks.Add(pair);
+            pair.AddOnDisposalCallback(this.RemoveCallback);
 
             return pair;
         }
@@ -147,37 +148,80 @@ namespace JapanesePractice.Core
         /// <param name="disposing">
         /// Indicates whether or not this method is being called from <see cref="Session.Dispose()"/>.
         /// </param>
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing = false)
         {
             // This method intentionally left blank.
         }
 
-        private sealed class CallbackStatePair : IDisposable
+        private void RemoveCallback(CallbackStatePair toRemove)
         {
-            private List<CallbackStatePair> collection;
-            private bool isDisposed;
+            this.beforeDisposalCallbacks.Remove(toRemove);
+        }
 
-            public CallbackStatePair(List<CallbackStatePair> collection, Action<object> callback, object state)
+        /// <summary>
+        /// Represents a pairing of a callback, and some state associated with the callback.
+        /// </summary>
+        protected class CallbackStatePair : IDisposable
+        {
+            private bool isDisposed;
+            private List<Action<CallbackStatePair>> onDisposals;
+
+            /// <summary>
+            /// Creates a new instance of a <see cref="CallbackStatePair"/> using the supplied arguments.
+            /// </summary>
+            /// <param name="callback">
+            /// The operation associated with this callback.
+            /// </param>
+            /// <param name="state">
+            /// Any state associated with this callback; it is expected that the <paramref name="callback"/> understands how to interpret it.
+            /// </param>
+            public CallbackStatePair(Action<object> callback, object state = null)
             {
-                this.collection = collection;
+                this.onDisposals = new List<Action<CallbackStatePair>>();
+
                 this.Callback = callback;
                 this.State = state;
 
                 this.isDisposed = false;
             }
 
+            /// <summary>
+            /// The operation associated with this callback.
+            /// </summary>
             public Action<object> Callback { get; private set; }
+
+            /// <summary>
+            /// Any state associated with this callback.
+            /// </summary>
             public object State { get; private set; }
 
+            /// <summary>
+            /// Adds the supplied callback <paramref name="action"/> to the set of callbacks which will be invoked upon disposal of the <see cref="CallbackStatePair"/>.
+            /// </summary>
+            /// <param name="action">
+            /// The callback to invoke upon disposal of this <see cref="CallbackStatePair"/>.
+            /// </param>
+            public void AddOnDisposalCallback(Action<CallbackStatePair> action)
+            {
+                if (action == null)
+                {
+                    throw new ArgumentNullException(nameof(action));
+                }
+
+                this.onDisposals.Add(action);
+            }
+
+            /// <summary>
+            /// Disposes of this <see cref="CallbackStatePair"/>.
+            /// </summary>
             public void Dispose()
             {
                 if (!this.isDisposed)
                 {
                     this.isDisposed = true;
-                    int index = this.collection.IndexOf(this);
-                    if (index > -1)
+                    foreach (Action<CallbackStatePair> onDispose in this.onDisposals)
                     {
-                        this.collection.RemoveAt(index);
+                        onDispose.Invoke(this);
                     }
                 }
             }
