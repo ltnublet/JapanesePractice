@@ -1,9 +1,10 @@
 # JapanesePractice
-Replicating a lost program I wrote for practicing hiragana/katakana.
+Replicating a lost program I wrote for practicing hiragana/katakana, which has
+since had its scope expanded to include practicing Japanese overall.
 
 ## Purpose
 A target-language-agnostic framework for practicing language skills. The
-language pair focused on by development are English-Japanese, but design
+language pair focused on by development is English-Japanese, but design
 decisions try to keep the application from being strictly tied to this.
 
 ## Building
