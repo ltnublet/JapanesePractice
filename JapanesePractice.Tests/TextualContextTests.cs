@@ -9,12 +9,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace JapanesePractice.Tests
 {
     [TestClass]
-    public static class TextualContextTests
+    public class TextualContextTests
     {
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("Smoke")]
-        public static void Condense_ValidCategories_ShouldSucceed()
+        public void Condense_ValidCategories_ShouldSucceed()
         {
             IContext context = new TextualLoader().LoadContextFromPath(SharedResources.Skeleton);
 

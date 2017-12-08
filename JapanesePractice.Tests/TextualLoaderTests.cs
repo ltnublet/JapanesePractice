@@ -12,12 +12,12 @@ using Newtonsoft.Json;
 namespace JapanesePractice.Tests
 {
     [TestClass]
-    public static class TextualLoaderTests
+    public class TextualLoaderTests
     {
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("Smoke")]
-        public static void FromFile_ValidJson_ShouldSucceed()
+        public void FromFile_ValidJson_ShouldSucceed()
         {
             IContext context = new TextualLoader().LoadContextFromPath(SharedResources.Skeleton);
 
@@ -37,7 +37,7 @@ namespace JapanesePractice.Tests
         [TestMethod]
         [TestCategory("Integration")]
         [TestCategory("Smoke")]
-        public static void CreateSymbolFromJson_ValidJson_ShouldSucceed()
+        public void CreateSymbolFromJson_ValidJson_ShouldSucceed()
         {
             JObject symbolAsJson;
             using (JsonReader reader = new JsonTextReader(new StreamReader(SharedResources.Skeleton_Symbol)))

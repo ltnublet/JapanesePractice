@@ -38,4 +38,4 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliantAttribute(false)]
 
-[assembly: InternalsVisibleTo("JapanesePractice.Tests.MSTest")]
+[assembly: InternalsVisibleTo("JapanesePractice.Tests")]

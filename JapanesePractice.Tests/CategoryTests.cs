@@ -7,10 +7,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace JapanesePractice.Tests
 {
     [TestClass]
-    public static class CategoryTests
+    public class CategoryTests
     {
         [TestMethod]
-        public static void Merge_ValidSymbols_ShouldSucceed()
+        public void Merge_ValidSymbols_ShouldSucceed()
         {
             const string symbolName = "Symbol";
             const string categoryOneValue = "CategoryOne";

@@ -51,7 +51,7 @@ namespace JapanesePractice.Core
         }
 
         /// <summary>
-        /// Registers a callback which will be triggered after <see cref="Session.Dispose()"/> is called, but before disposal begins.
+        /// Registers a callback which will be triggered after <see cref="Dispose()"/> is called, but before disposal begins.
         /// </summary>
         /// <param name="callback">
         /// The callback to register. When invoked, <paramref name="callback"/> will be provided the supplied <paramref name="state"/>.
@@ -62,7 +62,11 @@ namespace JapanesePractice.Core
         /// <returns>
         /// An <see cref="IDisposable"/> which, if disposed, unregisters the <paramref name="callback"/>.
         /// </returns>
-        public IDisposable RegisterDisposedCallback(Action<object> callback, object state)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1030:UseEventsWhereAppropriate",
+            Justification = "Callback is more than delegate.")]
+        public IDisposable AddOnDisposalCallback(Action<object> callback, object state)
         {
             CallbackStatePair pair = new CallbackStatePair(callback, state);
             this.beforeDisposalCallbacks.Add(pair);
@@ -161,7 +165,7 @@ namespace JapanesePractice.Core
         /// <summary>
         /// Represents a pairing of a callback, and some state associated with the callback.
         /// </summary>
-        protected class CallbackStatePair : IDisposable
+        protected sealed class CallbackStatePair : IDisposable
         {
             private bool isDisposed;
             private List<Action<CallbackStatePair>> onDisposals;
@@ -201,6 +205,10 @@ namespace JapanesePractice.Core
             /// <param name="action">
             /// The callback to invoke upon disposal of this <see cref="CallbackStatePair"/>.
             /// </param>
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1030:UseEventsWhereAppropriate",
+                Justification = "Callback is more than delegate.")]
             public void AddOnDisposalCallback(Action<CallbackStatePair> action)
             {
                 if (action == null)
