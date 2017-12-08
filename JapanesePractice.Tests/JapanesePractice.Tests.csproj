@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertExtensions.cs" />
     <Compile Include="CategoryTests.cs" />
     <Compile Include="SharedResources.cs" />
     <Compile Include="TextualContextTests.cs" />

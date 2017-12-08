@@ -16,7 +16,6 @@ namespace JapanesePractice.Tests
             const string categoryOneValue = "CategoryOne";
             const string categoryTwoValue = "CategoryTwo";
 
-
             Category categoryOne = new Category(
                 "CategoryOne_NameShouldntAffectTest", 
                 new[] 
@@ -40,7 +39,7 @@ namespace JapanesePractice.Tests
                     x.Interpretations.SelectMany(y => y.GetPermittedInterpretations()))
                 .Single();
 
-            Assert.AreEqual(expected, actual);
+            Assert.That.SequenceEqual(expected, actual);
         }
     }
 }

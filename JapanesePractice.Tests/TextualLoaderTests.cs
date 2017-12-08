@@ -20,8 +20,7 @@ namespace JapanesePractice.Tests
         public void FromFile_ValidJson_ShouldSucceed()
         {
             IContext context = new TextualLoader().LoadContextFromPath(SharedResources.Skeleton);
-
-            Assert.AreEqual(
+            Assert.That.SequenceEqual(
                 new string[]
                 {
                     "Category1",
