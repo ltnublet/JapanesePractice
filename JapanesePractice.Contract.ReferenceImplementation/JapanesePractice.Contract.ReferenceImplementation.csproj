@@ -53,6 +53,7 @@
     <Compile Include="RandomInterpretationSelector.cs" />
     <Compile Include="RandomSymbolSelector.cs" />
     <Compile Include="Symbol.cs" />
+    <Compile Include="TextualContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JapanesePractice.Contract\JapanesePractice.Contract.csproj">

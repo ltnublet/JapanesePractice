@@ -12,7 +12,7 @@ using JapanesePractice.Contract.ReferenceImplementation;
 namespace JapanesePractice.Textual
 {
     /// <summary>
-    /// A concrete <see cref="IContext"/> which can produce <see cref="TextualContext"/> or <see cref="TextualInterpretation"/>s from a data source.
+    /// A concrete <see cref="IContext"/> which can produce <see cref="Context"/> or <see cref="TextualInterpretation"/>s from a data source.
     /// </summary>
     [Export(typeof(ILoader))]
     public class TextualLoader : ILoader
@@ -59,13 +59,13 @@ namespace JapanesePractice.Textual
         }
 
         /// <summary>
-        /// Creates a <see cref="TextualContext"/> from the file specified by <paramref name="path"/>.
+        /// Creates a <see cref="Context"/> from the file specified by <paramref name="path"/>.
         /// </summary>
         /// <param name="path">
-        /// The path the <see cref="TextualLoader"/> should create the <see cref="TextualContext"/> from.
+        /// The path the <see cref="TextualLoader"/> should create the <see cref="Context"/> from.
         /// </param>
         /// <returns>
-        /// An <see cref="TextualContext"/> created by the <see cref="TextualLoader"/>.
+        /// An <see cref="Context"/> created by the <see cref="TextualLoader"/>.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Usage",
@@ -83,7 +83,7 @@ namespace JapanesePractice.Textual
                 }
             }
 
-            return new TextualContext(fileContents
+            return new Context(fileContents
                 .Value<JArray>("Categories")
                 .Select(x => this.CreateCategoryFromJson(x.ToString())));
         }

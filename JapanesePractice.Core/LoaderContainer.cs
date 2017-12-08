@@ -61,6 +61,11 @@ namespace JapanesePractice.Core
         }
 
         /// <summary>
+        /// The keys contained by this <see cref="LoaderCollection"/>.
+        /// </summary>
+        public IEnumerable<string> Keys => this.Loaders.Keys;
+
+        /// <summary>
         /// Gets the <see cref="ILoader"/> associated with the specified key.
         /// </summary>
         /// <param name="key">
@@ -79,32 +84,38 @@ namespace JapanesePractice.Core
         {
             get
             {
-                if (this.Loaders.ContainsKey(key))
+                LoaderTypePair[] loaders = this.GetMultipleInner(key).ToArray();
+                if (loaders.Length > 1)
                 {
-                    List<LoaderTypePair> loaders = this.Loaders[key];
-                    if (loaders.Count > 1)
-                    {
-                        throw new InvalidOperationException(
-                            string.Format(
-                                CultureInfo.InvariantCulture,
-                                "The key '{0}' had multiple supported ILoaders: {1}",
-                                key,
-                                string.Join(", ", loaders.Select(x => x.Type))));
-                    }
-                    else
-                    {
-                        return this.Loaders[key][0].Loader;
-                    }
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "The key '{0}' had multiple supported ILoaders: {1}",
+                            key,
+                            string.Join(", ", loaders.Select(x => x.Type))));
                 }
                 else
                 {
-                    throw new KeyNotFoundException(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "The key '{0}' did not exist in the collection.",
-                            key));
+                    return this.Loaders[key][0].Loader;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ILoader"/>s associated with the specified key.
+        /// </summary>
+        /// <param name="key">
+        /// The key of the <see cref="ILoader"/>s to get.
+        /// </param>
+        /// <returns>
+        /// The specified <see cref="ILoader"/>s.
+        /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        /// The <see cref="LoaderCollection"/> did not contain a <see cref="ILoader"/> associated with the specified key.
+        /// </exception>
+        public IEnumerable<ILoader> GetMultiple(string key)
+        {
+            return this.GetMultipleInner(key).Select(x => x.Loader);
         }
 
         /// <summary>
@@ -129,6 +140,22 @@ namespace JapanesePractice.Core
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        private IEnumerable<LoaderTypePair> GetMultipleInner(string key)
+        {
+            if (this.Loaders.ContainsKey(key))
+            {
+                return this.Loaders[key];
+            }
+            else
+            {
+                throw new KeyNotFoundException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "The key '{0}' did not exist in the collection.",
+                        key));
+            }
         }
 
         private class MefLoaderSource
