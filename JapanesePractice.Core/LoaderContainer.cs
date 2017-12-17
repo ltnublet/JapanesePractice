@@ -16,13 +16,16 @@ namespace JapanesePractice.Core
     public class LoaderCollection : IEnumerable<KeyValuePair<string, IEnumerable<ILoader>>>
     {
         private Dictionary<string, List<LoaderTypePair>> Loaders;
-        
+
         /// <summary>
         /// Instantiates a new <see cref="LoaderCollection"/>, searching the specified <paramref name="pluginLocations"/> for plugins to load <see cref="ILoader"/>s from.
         /// </summary>
         /// <param name="pluginLocations">
         /// The paths in which to search for plugins which export <see cref="ILoader"/>(s).
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Occurs when the supplied <paramref name="pluginLocations"/> is <see langword="null"/>.
+        /// </exception>
         public LoaderCollection(IEnumerable<string> pluginLocations)
         {
             if (pluginLocations == null)

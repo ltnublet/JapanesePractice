@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JapanesePractice.Contract.Selectors;
 
 namespace JapanesePractice.Core
@@ -36,6 +33,9 @@ namespace JapanesePractice.Core
         /// <returns>
         /// The <see cref="IInterpretationSelector"/> mapped to the supplied <see cref="Type"/> <paramref name="type"/>, or the fallback selector if no mapping was present.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Occurs when the supplied <paramref name="type"/> is <see langword="null"/>.
+        /// </exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",
             "CA1043:UseIntegralOrStringArgumentForIndexers",
@@ -68,6 +68,9 @@ namespace JapanesePractice.Core
         /// <returns>
         /// True if an explicit mapping was set; false otherwise.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Occurs when the supplied <paramref name="type"/> is <see langword="null"/>.
+        /// </exception>
         public bool ContainsKey(Type type) => this.selectors.ContainsKey(type);
     }
 }
