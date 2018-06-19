@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JapanesePractice.Contract.Datasources
+namespace JapanesePractice.Contract.DataSources
 {
-    public interface IDatasource
+    /// <summary>
+    /// Foo
+    /// </summary>
+    public interface IDataSource
     {
+        /// <summary>
+        /// Bar
+        /// </summary>
+        string Bar { get; }
     }
 }
