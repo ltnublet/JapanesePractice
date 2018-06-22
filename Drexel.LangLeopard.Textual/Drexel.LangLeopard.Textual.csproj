@@ -52,7 +52,7 @@
     <Compile Include="TextualInterpretation.cs" />
     <Compile Include="TextualInterpretationSource.cs" />
     <Compile Include="TextualFileLoader.cs" />
-    <Compile Include="TextualLoaderFactory.cs" />
+    <Compile Include="TextualFileLoaderFactory.cs" />
     <Compile Include="TextualSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextualSymbolSource.cs" />

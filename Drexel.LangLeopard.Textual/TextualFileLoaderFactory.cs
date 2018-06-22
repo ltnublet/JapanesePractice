@@ -11,10 +11,11 @@ using Drexel.LangLeopard.Contracts.Loaders;
 
 namespace Drexel.LangLeopard.Textual
 {
-    public class TextualFileLoaderFactory : ILoaderFactory<Localized>
+    public class TextualFileLoaderFactory : ILoaderFactory<Localized>, ILoaderFactoryTypeProvider
     {
         private static readonly IConfigurationRequirement path;
-        private static IConfigurationRequirement[] requirements;
+        private static readonly IConfigurationRequirement[] requirements;
+        private static readonly IReadOnlyList<Type> supportedTypes;
 
         static TextualFileLoaderFactory()
         {
@@ -27,9 +28,13 @@ namespace Drexel.LangLeopard.Textual
                 {
                     TextualFileLoaderFactory.path
                 };
+
+            TextualFileLoaderFactory.supportedTypes = new List<Type> { typeof(Localized) };
         }
 
         public IReadOnlyList<IConfigurationRequirement> Requirements => TextualFileLoaderFactory.requirements;
+
+        public IEnumerable<Type> SupportedTypes => TextualFileLoaderFactory.supportedTypes;
 
         public ILoader<Localized> GetInstance(IReadOnlyDictionary<IConfigurationRequirement, object> mappings) =>
             new TextualFileLoader((FilePath)new Configuration(this, mappings, null)[TextualFileLoaderFactory.path]);

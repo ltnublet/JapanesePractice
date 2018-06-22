@@ -49,6 +49,7 @@
     <Compile Include="IInterpretation.cs" />
     <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="Loaders\ILoaderFactory.cs" />
+    <Compile Include="Loaders\ILoaderFactoryTypeProvider.cs" />
     <Compile Include="Sources\IInterpretationSource.cs" />
     <Compile Include="ISymbol.cs" />
     <Compile Include="Language.cs" />
