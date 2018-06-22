@@ -22,22 +22,26 @@ namespace Drexel.LangLeopard.FrontEnd.Debug
             // Fluently modify the RegistrationBuilder to "export" all ILoaderFactoryTypeProviders. We "export"
             // because the RegistrationBuilder is operating from the perspective of the assembly.
             builder.ForTypesDerivedFrom(typeof(ILoaderFactoryTypeProvider)).Export<ILoaderFactoryTypeProvider>();
+            builder.ForType<Textual.TextualFileLoaderFactory>().Export(); // TODO: make generic
 
             // Load all the assemblies in the current directory.
             string directory = Directory.GetCurrentDirectory();
             DirectoryCatalog catalog = new DirectoryCatalog(directory, builder);
             CompositionContainer container = new CompositionContainer(catalog);
 
-            ImportBuffer buffer = new ImportBuffer();
+            ImportProviderBuffer buffer = new ImportProviderBuffer();
             container.ComposeParts(buffer);
 
             Console.ReadLine();
         }
 
-        public class ImportBuffer
+        public class ImportProviderBuffer
         {
             [ImportMany(typeof(ILoaderFactoryTypeProvider))]
             public IEnumerable<ILoaderFactoryTypeProvider> TypeProviders { get; set; }
+
+            [ImportMany(typeof(Textual.TextualFileLoaderFactory))] // TODO: make generic
+            public IEnumerable<Textual.TextualFileLoaderFactory> Factories { get; set; }
         }
     }
 }
