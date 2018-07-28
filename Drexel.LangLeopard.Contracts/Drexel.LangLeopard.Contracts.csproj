@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Drexel.Configurables" Version="0.4.0" />
+    <PackageReference Include="Drexel.Configurables" Version="0.4.1" />
+    <PackageReference Include="Drexel.Configurables.Contracts" Version="0.4.1" />
+    <PackageReference Include="Drexel.Configurables.External" Version="0.2.0" />
   </ItemGroup>
 
 </Project>
