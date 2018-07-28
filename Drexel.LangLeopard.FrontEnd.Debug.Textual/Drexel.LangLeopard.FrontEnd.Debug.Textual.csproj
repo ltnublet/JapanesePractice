@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Drexel.LangLeopard.Contracts\Drexel.LangLeopard.Contracts.csproj">
-      <Project>{a3768c5c-d464-4d64-bb14-d5f852070494}</Project>
+      <Project>{adf8de6c-4953-4937-b890-212c66a25c3c}</Project>
       <Name>Drexel.LangLeopard.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Drexel.LangLeopard.Textual\Drexel.LangLeopard.Textual.csproj">
