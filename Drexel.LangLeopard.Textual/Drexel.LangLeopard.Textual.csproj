@@ -30,14 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Drexel.Configurables, Version=0.3.6742.1310, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Drexel.Configurables.0.3.6741\lib\Net472\Drexel.Configurables.dll</HintPath>
+    <Reference Include="Drexel.Configurables, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Drexel.Configurables.0.4.0\lib\netstandard2.0\Drexel.Configurables.dll</HintPath>
     </Reference>
-    <Reference Include="Drexel.Configurables.Contracts, Version=0.3.6742.1309, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Drexel.Configurables.Contracts.0.3.6741\lib\Net472\Drexel.Configurables.Contracts.dll</HintPath>
+    <Reference Include="Drexel.Configurables.Contracts, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Drexel.Configurables.Contracts.0.4.0\lib\netstandard2.0\Drexel.Configurables.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Drexel.Configurables.External, Version=0.1.6738.24478, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Drexel.Configurables.External.0.1.6738.1\lib\Net472\Drexel.Configurables.External.dll</HintPath>
+    <Reference Include="Drexel.Configurables.External, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Drexel.Configurables.External.0.2.0\lib\netstandard2.0\Drexel.Configurables.External.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,13 +58,13 @@
     <Compile Include="TextualSymbolSource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Drexel.LangLeopard.Contracts\Drexel.LangLeopard.Contracts.csproj">
-      <Project>{a3768c5c-d464-4d64-bb14-d5f852070494}</Project>
-      <Name>Drexel.LangLeopard.Contracts</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Drexel.LangLeopard.Contracts\Drexel.LangLeopard.Contracts.csproj">
+      <Project>{adf8de6c-4953-4937-b890-212c66a25c3c}</Project>
+      <Name>Drexel.LangLeopard.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

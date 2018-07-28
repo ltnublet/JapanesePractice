@@ -43,11 +43,5 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Drexel.LangLeopard.Contracts\Drexel.LangLeopard.Contracts.csproj">
-      <Project>{a3768c5c-d464-4d64-bb14-d5f852070494}</Project>
-      <Name>Drexel.LangLeopard.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
